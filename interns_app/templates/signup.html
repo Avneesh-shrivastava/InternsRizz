@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JobSwipe - Sign Up</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Inter, Arial, sans-serif;
+            background: #080b18;
+            color: white;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #6c5ce7;
+            filter: blur(180px);
+            opacity: 0.18;
+            top: -180px;
+            left: -150px;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            background: #00b4d8;
+            filter: blur(180px);
+            opacity: 0.12;
+            right: -150px;
+            bottom: -180px;
+            z-index: -1;
+        }
+
+        /* Navbar */
+
+        .navbar {
+            height: 80px;
+            padding: 0 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+
+            background: rgba(8,11,24,0.75);
+            backdrop-filter: blur(15px);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            background: linear-gradient(90deg, #8b5cf6, #22d3ee);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .login-link {
+            color: #a7acc5;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .login-link span {
+            color: #9b8aff;
+            font-weight: 600;
+        }
+
+        /* Main */
+
+        .signup-wrapper {
+            min-height: calc(100vh - 80px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 50px 20px;
+        }
+
+        .signup-container {
+            width: 100%;
+            max-width: 1050px;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            background: rgba(17,22,42,0.85);
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            border-radius: 28px;
+
+            overflow: hidden;
+
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+
+            backdrop-filter: blur(20px);
+        }
+
+        /* Left section */
+
+        .signup-info {
+            padding: 60px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(124,92,246,0.25),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 90% 80%,
+                    rgba(34,211,238,0.15),
+                    transparent 35%
+                );
+        }
+
+        .badge {
+            width: fit-content;
+
+            padding: 8px 14px;
+
+            border-radius: 50px;
+
+            background: rgba(124,92,246,0.12);
+
+            border: 1px solid rgba(124,92,246,0.25);
+
+            color: #b9a7ff;
+
+            font-size: 13px;
+
+            margin-bottom: 25px;
+        }
+
+        .signup-info h1 {
+            font-size: 46px;
+            line-height: 1.08;
+            letter-spacing: -2px;
+
+            margin-bottom: 20px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(
+                90deg,
+                #9b7cff,
+                #22d3ee
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .signup-info p {
+            color: #9ca3bd;
+
+            font-size: 16px;
+
+            line-height: 1.7;
+
+            max-width: 420px;
+
+            margin-bottom: 35px;
+        }
+
+        /* Steps */
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            color: #d8dbea;
+
+            font-size: 14px;
+        }
+
+        .step-number {
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: rgba(124,92,246,0.14);
+
+            color: #a78bfa;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* Form section */
+
+        .signup-box {
+            padding: 55px 60px;
+
+            background: rgba(12,16,31,0.65);
+        }
+
+        .heading {
+            margin-bottom: 30px;
+        }
+
+        .heading h2 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .heading p {
+            color: #8f96b0;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+
+            color: #c6c9d8;
+
+            font-size: 13px;
+
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper span {
+            position: absolute;
+
+            left: 15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #6f7690;
+        }
+
+        .form-group input {
+            width: 100%;
+
+            padding: 13px 15px 13px 43px;
+
+            background: #0a0e1d;
+
+            border: 1px solid #20263d;
+
+            border-radius: 10px;
+
+            color: white;
+
+            outline: none;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #7865ed;
+
+            box-shadow:
+                0 0 0 3px rgba(120,101,237,0.1);
+        }
+
+        /* Button */
+
+        .signup-btn {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #735ce8,
+                    #5b8def
+                );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 10px 25px rgba(92,82,220,0.2);
+        }
+
+        .signup-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 14px 30px rgba(92,82,220,0.3);
+        }
+
+        /* Divider */
+
+        .divider {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 24px 0;
+
+            color: #626981;
+
+            font-size: 12px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+
+            flex: 1;
+
+            height: 1px;
+
+            background: #242a40;
+        }
+
+        /* Google */
+
+        .google-btn {
+            width: 100%;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            border: 1px solid #292f46;
+
+            background: #101527;
+
+            color: #dce0ed;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+        .google-btn:hover {
+            background: #161c31;
+
+            border-color: #3a4260;
+        }
+
+        .terms {
+            text-align: center;
+
+            color: #626981;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+
+            margin-top: 20px;
+        }
+
+        .terms a {
+            color: #9b8aff;
+
+            text-decoration: none;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 850px) {
+
+            .signup-container {
+                grid-template-columns: 1fr;
+
+                max-width: 550px;
+            }
+
+            .signup-info {
+                display: none;
+            }
+
+            .signup-box {
+                padding: 45px 35px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .navbar {
+                padding: 0 5%;
+            }
+
+            .signup-wrapper {
+                padding: 25px 15px;
+            }
+
+            .signup-box {
+                padding: 35px 22px;
+            }
+
+            .signup-container {
+                border-radius: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Intern's <span>Rizz</span>
+        </div>
+
+        <a href="/login-view" class="login-link">
+            Already have an account?
+            <span>Login</span>
+        </a>
+
+    </nav>
+
+
+    <main class="signup-wrapper">
+
+        <div class="signup-container">
+
+            <!-- LEFT SIDE -->
+
+            <section class="signup-info">
+
+                <div class="badge">
+                    🚀 Start your career journey
+                </div>
+
+                <h1>
+                    Your next job
+                    starts with a
+                    <span class="gradient-text">
+                        swipe.
+                    </span>
+                </h1>
+
+                <p>
+                    Create your JobSwipe account and discover
+                    internships and jobs that match your skills,
+                    interests and career goals.
+                </p>
+
+
+                <div class="steps">
+
+                    <div class="step">
+
+                        <div class="step-number">
+                            01
+                        </div>
+
+                        <span>
+                            Create your profile
+                        </span>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-number">
+                            02
+                        </div>
+
+                        <span>
+                            Upload your resume
+                        </span>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-number">
+                            03
+                        </div>
+
+                        <span>
+                            Start discovering jobs
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- SIGNUP FORM -->
+       
+            
+            <section class="signup-box">
+
+                <div class="heading">
+
+                    <h2>
+                        Create your account
+                    </h2>
+
+                    <p>
+                        It only takes a minute to get started.
+                    </p>
+
+                </div>
+
+
+                <form method="POST" action="{% url 'signup_view' %}">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span>👤</span>
+
+                            <input
+                                type="text"
+                                placeholder="Enter your full name"
+                                name="full_name"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Username
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span>👤</span>
+
+                            <input
+                                type="text"
+                                placeholder="Username"
+                                name="username"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span>✉</span>
+
+                            <input
+                                type="email"
+                                placeholder="you@example.com"
+                                name="email"
+                                required>
+                                
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span>🔒</span>
+
+                            <input
+                                type="password"
+                                placeholder="Create a strong password"
+                                name="password"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Confirm Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span>🔐</span>
+
+                            <input
+                                type="password"
+                                placeholder="Confirm your password"
+                                name="confirm_password"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                
+
+                    <button
+                        type="submit"
+                        class="signup-btn">
+
+                        Create Account →
+
+                    </button>
+                </form>
+
+                    <div class="divider">
+                        OR
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="google-btn">
+
+                        Continue with Google
+
+                    </button>
+
+
+                    <p class="terms">
+
+                        By creating an account, you agree to our
+                        <a href="#">Terms</a>
+                        and
+                        <a href="#">Privacy Policy</a>.
+
+                    </p>
+
+                
+
+            </section>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

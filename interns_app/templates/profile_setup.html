@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Build Your Profile | Interns Rizz</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top left, #302060 0%, transparent 35%),
+                radial-gradient(circle at bottom right, #142b5f 0%, transparent 35%),
+                #080b18;
+            color: #fff;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            width: 100%;
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(8, 11, 24, 0.75);
+            backdrop-filter: blur(12px);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            text-decoration: none;
+
+            background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .step-text {
+            color: #a8aec7;
+            font-size: 14px;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: min(900px, 92%);
+            margin: 45px auto 70px;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .heading h1 {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .heading h1 span {
+            background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .heading p {
+            color: #9da4bd;
+            font-size: 16px;
+        }
+
+        /* PROGRESS */
+
+        .progress-container {
+            margin-bottom: 35px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: #aeb4ca;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 7px;
+            background: #1b2035;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress {
+            width: 25%;
+            height: 100%;
+            background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+            border-radius: 20px;
+        }
+
+        /* CARD */
+
+        .profile-card {
+            background: rgba(17, 22, 42, 0.88);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 22px;
+            padding: 35px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.3);
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 7px;
+        }
+
+        .section-description {
+            color: #858da9;
+            font-size: 14px;
+            margin-bottom: 22px;
+        }
+
+        /* FORM */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 14px;
+            color: #d7d9e5;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #292f49;
+            border-radius: 10px;
+            background: #0d1225;
+            color: #fff;
+            outline: none;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #6d5dfc;
+            box-shadow: 0 0 0 3px rgba(109,93,252,0.12);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #606982;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        select option {
+            background: #0d1225;
+        }
+
+        /* SKILLS */
+
+        .skills-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px;
+            min-height: 55px;
+            border: 1px solid #292f49;
+            border-radius: 10px;
+            background: #0d1225;
+        }
+
+        .skill {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 11px;
+            background: rgba(109,93,252,0.15);
+            border: 1px solid rgba(109,93,252,0.35);
+            color: #c9c3ff;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .skill button {
+            border: none;
+            background: none;
+            color: #aaa4d9;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .skill-input {
+            border: none;
+            background: transparent;
+            min-width: 130px;
+            padding: 5px;
+            box-shadow: none;
+        }
+
+        .skill-input:focus {
+            box-shadow: none;
+            border: none;
+        }
+
+        /* RESUME */
+
+        .resume-upload {
+            border: 1.5px dashed #3a4262;
+            border-radius: 14px;
+            padding: 30px;
+            text-align: center;
+            background: rgba(13,18,37,0.6);
+            transition: 0.2s;
+        }
+
+        .resume-upload:hover {
+            border-color: #7164f5;
+            background: rgba(109,93,252,0.06);
+        }
+
+        .upload-icon {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .resume-upload h3 {
+            font-size: 16px;
+            margin-bottom: 7px;
+        }
+
+        .resume-upload p {
+            color: #777f9b;
+            font-size: 13px;
+            margin-bottom: 17px;
+        }
+
+        .upload-btn {
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 9px;
+            background: #1b2140;
+            border: 1px solid #343c61;
+            color: #fff;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .upload-btn:hover {
+            border-color: #7164f5;
+        }
+
+        #resume {
+            display: none;
+        }
+
+        /* BUTTONS */
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .skip-btn {
+            color: #858da9;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .skip-btn:hover {
+            color: #fff;
+        }
+
+        .continue-btn {
+            border: none;
+            padding: 13px 25px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #7c5cff, #3478f6);
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(70,90,255,0.3);
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 0 5%;
+            }
+
+            .container {
+                margin-top: 30px;
+            }
+
+            .heading h1 {
+                font-size: 30px;
+            }
+
+            .profile-card {
+                padding: 22px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+
+            .actions {
+                gap: 15px;
+            }
+        }
+
+
+
+
+
+
+
+
+.skills-wrapper { position: relative; }
+
+.skills-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+    background: #0b1020;                 /* dark, same as your selects */
+    border: 1px solid #2a3350;
+    border-radius: 10px;
+    cursor: text;
+    transition: border-color .2s, box-shadow .2s;
+}
+.skills-box:focus-within {
+    border-color: #818cf8;
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, .2);
+}
+
+.skill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: rgba(129, 140, 248, .15);
+    border: 1px solid rgba(129, 140, 248, .4);
+    color: #c7d2fe;
+    border-radius: 999px;
+    font-size: 14px;
+}
+.skill button {
+    border: none;
+    background: none;
+    color: #a5b4fc;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    padding: 0;
+}
+.skill button:hover { color: #f87171; }
+
+.skill-input {
+    flex: 1;
+    min-width: 140px;
+    border: none;
+    outline: none;
+    background: transparent;             /* removes the white */
+    color: #fff;                         /* typed text visible */
+    font-size: 14px;
+    padding: 6px 4px;
+}
+.skill-input::placeholder { color: #6b7394; }
+
+.suggestions {
+    position: absolute;
+    left: 0; right: 0;
+    margin: 4px 0 0;
+    padding: 4px;
+    list-style: none;
+    background: #131a30;
+    border: 1px solid #2a3350;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .5);
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 10;
+}
+.suggestions li {
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #e5e7eb;
+}
+.suggestions li:hover,
+.suggestions li.active { background: rgba(129, 140, 248, .2); }
+
+.quick-label { margin: 16px 0 8px; font-size: 13px; color: #8b92b0; }
+.quick-add { display: flex; flex-wrap: wrap; gap: 8px; }
+.quick-add button {
+    padding: 5px 12px;
+    border: 1px dashed #4b5578;
+    border-radius: 999px;
+    background: none;
+    color: #aab1cf;                      /* the missing piece: buttons default to black */
+    cursor: pointer;
+    font-size: 13px;
+}
+.quick-add button:hover {
+    border-color: #818cf8;
+    color: #c7d2fe;
+    background: rgba(129, 140, 248, .1);
+}
+
+
+
+
+
+
+
+/* stop the browser from painting the input white */
+.skill-input:-webkit-autofill,
+.skill-input:-webkit-autofill:hover,
+.skill-input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #fff;
+    -webkit-box-shadow: 0 0 0 1000px #0b1020 inset;  /* same as .skills-box background */
+    caret-color: #fff;
+    transition: background-color 9999s ease-in-out 0s;
+}
+
+.skills-box { color-scheme: dark; }  /* makes native browser UI use dark colors */
+
+
+
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+        <a href="#" class="logo">Intern's Rizz</a>
+
+        <div class="step-text">
+            Step 1 of 4
+        </div>
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+        <div class="heading">
+            <h1>Build Your <span>Profile</span></h1>
+
+            <p>
+                Tell us about yourself so we can find jobs that actually match you.
+            </p>
+        </div>
+
+
+        <!-- PROGRESS -->
+
+        <div class="progress-container">
+
+            <div class="progress-info">
+                <span>Profile setup</span>
+                <span>25%</span>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+
+        </div>
+
+
+        <!-- PROFILE CARD -->
+
+        <div class="profile-card">
+
+            <form method="POST"
+                  action="{% url 'profile_setup' %}"
+                  enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+
+                <!-- BASIC INFORMATION -->
+
+                <section class="section">
+
+                    <h2 class="section-title">
+                        Basic Information
+                    </h2>
+
+                    <p class="section-description">
+                        Let recruiters know who you are.
+                    </p>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="full_name">
+                                Full Name
+                            </label>
+
+                            <input
+                                class="skill-input"
+                                type="text"
+                                id="full_name"
+                                name="full_name"
+                                placeholder="Enter your full name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="phone">
+                                Phone Number
+                            </label>
+
+                            <input
+                                class="skill-input"
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="Enter your phone number"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="location">
+                                Location
+                            </label>
+
+                            <input
+                                class="skill-input"
+                                type="text"
+                                id="location"
+                                name="location"
+                                placeholder="e.g. Bhopal, Madhya Pradesh"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="role">
+                                What are you looking for?
+                            </label>
+
+                            <select id="role" name="preferred_role">
+
+                                <option value="">
+                                    Select a role
+                                </option>
+
+                                <option value="python_developer">
+                                    Python Developer
+                                </option>
+
+                                <option value="web_developer">
+                                    Web Developer
+                                </option>
+
+                                <option value="backend_developer">
+                                    Backend Developer
+                                </option>
+
+                                <option value="frontend_developer">
+                                    Frontend Developer
+                                </option>
+
+                                <option value="data_analyst">
+                                    Data Analyst
+                                </option>
+
+                                <option value="data_engineer">
+                                    Data Engineer
+                                </option>
+
+                                <option value="software_developer">
+                                    Software Developer
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- EDUCATION -->
+
+                <section class="section">
+
+                    <h2 class="section-title">
+                        Education
+                    </h2>
+
+                    <p class="section-description">
+                        Help us understand your academic background.
+                    </p>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="education">
+                                Degree
+                            </label>
+
+                            <select id="education" name="education">
+
+                                <option value="">
+                                    Select your degree
+                                </option>
+
+                                <option value="bca">
+                                    BCA
+                                </option>
+
+                                <option value="btech">
+                                    B.Tech
+                                </option>
+
+                                <option value="bsc">
+                                    B.Sc
+                                </option>
+
+                                <option value="mca">
+                                    MCA
+                                </option>
+
+                                <option value="other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="college">
+                                College / University
+                            </label>
+
+                            <input
+                                class="skill-input"
+                                type="text"
+                                id="college"
+                                name="college"
+                                placeholder="Enter your college"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="graduation_year">
+                                Graduation Year
+                            </label>
+
+                            <select
+                                id="graduation_year"
+                                name="graduation_year"
+                            >
+
+                                <option value="">
+                                    Select year
+                                </option>
+
+                                <option>2026</option>
+                                <option>2027</option>
+                                <option>2028</option>
+                                <option>2029</option>
+                                <option>2030</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="experience">
+                                Experience Level
+                            </label>
+
+                            <select
+                                id="experience"
+                                name="experience"
+                            >
+
+                                <option value="">
+                                    Select experience
+                                </option>
+
+                                <option value="fresher">
+                                    Fresher
+                                </option>
+
+                                <option value="student">
+                                    Student
+                                </option>
+
+                                <option value="intern">
+                                    Previous Internship
+                                </option>
+
+                                <option value="1_year">
+                                    1+ Year Experience
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SKILLS -->
+
+<section class="section">
+    <h2 class="section-title">Your Skills</h2>
+    <p class="section-description">Add technologies and skills you know.</p>
+
+    <div class="skills-wrapper">
+        <div class="skills-box" id="skillsBox">
+            <!-- chips are rendered here by JS -->
+            <input
+                class="skill-input"
+                id="skillInput"
+                type="text"
+                placeholder="Add a skill..."
+                autocomplete="off"
+                maxlength="30"
+            >
+        </div>
+
+        <ul class="suggestions" id="suggestions" hidden></ul>
+    </div>
+
+    <!-- This is what Django receives on form submit -->
+    <input type="hidden" name="skills" id="skillsHidden">
+
+    <p class="quick-label">Popular skills</p>
+    <div class="quick-add" id="quickAdd"></div>
+</section>
+
+               
+
+
+                <!-- ABOUT -->
+
+                <section class="section">
+
+                    <h2 class="section-title">
+                        About You
+                    </h2>
+
+                    <p class="section-description">
+                        Give recruiters a short introduction about yourself.
+                    </p>
+
+
+                    <div class="form-group">
+
+                        <textarea
+                            name="about"
+                            placeholder="Example: BCA student passionate about Python development and backend technologies..."
+                        ></textarea>
+
+                    </div>
+
+                </section>
+
+
+                <!-- RESUME -->
+
+                <section class="section">
+
+                    <h2 class="section-title">
+                        Upload Your Resume
+                    </h2>
+
+                    <p class="section-description">
+                        Your resume helps us find better job matches for you.
+                    </p>
+
+
+                    <div class="resume-upload">
+
+                        <div class="upload-icon">
+                            📄
+                        </div>
+
+                        <h3>
+                            Upload your resume
+                        </h3>
+
+                        <p>
+                            PDF or DOCX • Maximum 5MB
+                        </p>
+
+                        <label for="resume" class="upload-btn">
+                            Choose Resume
+                        </label>
+
+                        <input
+                            class="skill-input"
+                            type="file"
+                            id="resume"
+                            name="resume"
+                            accept=".pdf,.doc,.docx"
+                        >
+
+                    </div>
+
+                </section>
+
+
+                <!-- ACTIONS -->
+
+                <div class="actions">
+
+                    <a href="#" class="skip-btn">
+                        I'll do this later
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="continue-btn"
+                    >
+                        Save & Continue →
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+
+
+
+
+
+    <script>
+const OPTIONS = [
+    "Python", "Django", "Flask", "FastAPI", "SQL", "PostgreSQL", "MySQL", "SQLite",
+    "JavaScript", "TypeScript", "React", "Node.js", "HTML", "CSS", "Tailwind CSS",
+    "Bootstrap", "REST APIs", "Django REST Framework", "Git", "GitHub", "Docker",
+    "Linux", "Java", "C++", "C", "Redis", "Celery", "AWS", "Figma", "Data Structures"
+];
+
+let skills = ["Python", "Django", "SQL"];
+let activeIndex = -1;
+
+const box = document.getElementById("skillsBox");
+const input = document.getElementById("skillInput");
+const list = document.getElementById("suggestions");
+const hidden = document.getElementById("skillsHidden");
+const quickAdd = document.getElementById("quickAdd");
+
+const has = (name) => skills.some(s => s.toLowerCase() === name.toLowerCase());
+
+function addSkill(raw) {
+    const name = raw.trim().replace(/\s+/g, " ");
+    if (!name || has(name)) { input.value = ""; return; }
+    skills.push(name);
+    input.value = "";
+    render();
+}
+
+function removeSkill(name) {
+    skills = skills.filter(s => s !== name);
+    render();
+}
+
+function render() {
+    // chips
+    box.querySelectorAll(".skill").forEach(el => el.remove());
+    skills.forEach(name => {
+        const chip = document.createElement("div");
+        chip.className = "skill";
+        chip.append(name);                      // textContent-safe (no XSS)
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = "×";
+        btn.setAttribute("aria-label", `Remove ${name}`);
+        btn.addEventListener("click", () => removeSkill(name));
+        chip.append(btn);
+        box.insertBefore(chip, input);
+    });
+
+    // value sent to the server
+    hidden.value = skills.join(",");
+
+    // popular skills (hide the ones already added)
+    quickAdd.innerHTML = "";
+    OPTIONS.filter(o => !has(o)).slice(0, 10).forEach(o => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.textContent = "+ " + o;
+        b.addEventListener("click", () => addSkill(o));
+        quickAdd.append(b);
+    });
+
+    showSuggestions();
+}
+
+function showSuggestions() {
+    const q = input.value.trim().toLowerCase();
+    list.innerHTML = "";
+    activeIndex = -1;
+    if (!q) { list.hidden = true; return; }
+
+    const matches = OPTIONS.filter(o => !has(o) && o.toLowerCase().includes(q)).slice(0, 8);
+    matches.forEach(o => {
+        const li = document.createElement("li");
+        li.textContent = o;
+        li.addEventListener("mousedown", e => { e.preventDefault(); addSkill(o); });
+        list.append(li);
+    });
+    list.hidden = matches.length === 0;
+}
+
+function moveActive(step) {
+    const items = [...list.children];
+    if (!items.length) return;
+    activeIndex = (activeIndex + step + items.length) % items.length;
+    items.forEach((li, i) => li.classList.toggle("active", i === activeIndex));
+}
+
+input.addEventListener("input", showSuggestions);
+
+input.addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === ",") {
+        e.preventDefault();                       // stops the form from submitting
+        const chosen = list.children[activeIndex];
+        addSkill(chosen ? chosen.textContent : input.value);
+    } else if (e.key === "Backspace" && !input.value && skills.length) {
+        removeSkill(skills[skills.length - 1]);
+    } else if (e.key === "ArrowDown") { e.preventDefault(); moveActive(1); }
+    else if (e.key === "ArrowUp")     { e.preventDefault(); moveActive(-1); }
+    else if (e.key === "Escape")      { list.hidden = true; }
+});
+
+input.addEventListener("blur", () => { list.hidden = true; });
+box.addEventListener("click", () => input.focus());
+
+render();
+</script>
+
+
+</body>
+</html>

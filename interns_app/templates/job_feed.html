@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Job Feed | Interns Rizz</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 10% 0%, #302060 0%, transparent 30%),
+                radial-gradient(circle at 90% 70%, #142b5f 0%, transparent 35%),
+                #080b18;
+            color: #fff;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            height: 72px;
+            padding: 0 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: rgba(8, 11, 24, 0.8);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+
+            backdrop-filter: blur(14px);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            text-decoration: none;
+
+            background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-link {
+            color: #a7aec5;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-link:hover {
+            color: white;
+        }
+
+        .profile {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(135deg, #7c5cff, #3478f6);
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+
+        /* MAIN */
+
+        .container {
+            width: min(1100px, 92%);
+            margin: 35px auto 60px;
+        }
+
+
+        /* HEADER */
+
+        .feed-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            margin-bottom: 25px;
+        }
+
+        .feed-header h1 {
+            font-size: 30px;
+            margin-bottom: 7px;
+        }
+
+        .feed-header h1 span {
+            background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feed-header p {
+            color: #858da9;
+            font-size: 14px;
+        }
+
+        .filter-btn {
+            padding: 10px 16px;
+            border-radius: 9px;
+
+            background: #11172c;
+            border: 1px solid #292f49;
+
+            color: #dce0ee;
+            cursor: pointer;
+        }
+
+        .filter-btn:hover {
+            border-color: #6d5dfc;
+        }
+
+
+        /* LAYOUT */
+
+        .feed-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+
+
+        /* SIDEBAR */
+
+        .sidebar {
+            background: rgba(17,22,42,0.8);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 18px;
+            padding: 22px;
+            height: fit-content;
+        }
+
+        .sidebar h3 {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .filter-group {
+            margin-bottom: 23px;
+        }
+
+        .filter-title {
+            font-size: 12px;
+            color: #7f87a2;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin: 10px 0;
+            color: #b5bbcf;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .filter-option input {
+            accent-color: #7c5cff;
+        }
+
+
+        /* JOB AREA */
+
+        .job-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+        /* JOB CARD */
+
+        .job-card {
+            width: 100%;
+            max-width: 650px;
+
+            background: rgba(17,22,42,0.92);
+            border: 1px solid rgba(255,255,255,0.09);
+
+            border-radius: 22px;
+            padding: 30px;
+
+            box-shadow:
+                0 25px 70px rgba(0,0,0,0.3);
+
+            position: relative;
+        }
+
+
+        /* MATCH */
+
+        .match {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+
+            padding: 7px 12px;
+            border-radius: 20px;
+
+            background: rgba(34,197,94,0.12);
+            border: 1px solid rgba(34,197,94,0.3);
+
+            color: #70e49a;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+
+        /* COMPANY */
+
+        .company-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            margin-bottom: 25px;
+        }
+
+        .company-logo {
+            width: 58px;
+            height: 58px;
+
+            border-radius: 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                #282f59,
+                #171c35
+            );
+
+            border: 1px solid #343b5d;
+
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .company-name {
+            color: #9ba3bd;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .job-title {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+
+        /* JOB INFO */
+
+        .job-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            margin-bottom: 22px;
+        }
+
+        .info {
+            padding: 7px 11px;
+
+            background: #11172c;
+            border: 1px solid #292f49;
+
+            border-radius: 7px;
+
+            color: #aeb5cb;
+            font-size: 12px;
+        }
+
+
+        /* DESCRIPTION */
+
+        .description {
+            color: #9ba3bb;
+            line-height: 1.7;
+            font-size: 14px;
+            margin-bottom: 23px;
+        }
+
+
+        /* SKILLS */
+
+        .skills-title {
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+
+            margin-bottom: 25px;
+        }
+
+        .skill {
+            padding: 7px 11px;
+
+            border-radius: 7px;
+
+            background: rgba(124,92,255,0.1);
+            border: 1px solid rgba(124,92,255,0.25);
+
+            color: #bdb4ff;
+            font-size: 12px;
+        }
+
+
+        /* RESUME MATCH */
+
+        .resume-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            background: rgba(59,130,246,0.07);
+            border: 1px solid rgba(59,130,246,0.18);
+
+            margin-bottom: 25px;
+        }
+
+        .resume-left {
+            display: flex;
+            gap: 11px;
+            align-items: center;
+        }
+
+        .resume-icon {
+            font-size: 21px;
+        }
+
+        .resume-text h4 {
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .resume-text p {
+            font-size: 11px;
+            color: #7f88a4;
+        }
+
+        .modify-btn {
+            padding: 8px 12px;
+
+            border-radius: 7px;
+
+            background: transparent;
+            border: 1px solid #3d67b5;
+
+            color: #74a4ff;
+
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .modify-btn:hover {
+            background: rgba(59,130,246,0.1);
+        }
+
+
+        /* SWIPE BUTTONS */
+
+        .swipe-actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 22px;
+
+            margin-top: 25px;
+        }
+
+        .swipe-btn {
+            width: 58px;
+            height: 58px;
+
+            border-radius: 50%;
+
+            background: #11172c;
+            border: 1px solid #303752;
+
+            color: white;
+
+            font-size: 23px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .swipe-btn:hover {
+            transform: translateY(-4px);
+        }
+
+        .reject:hover {
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+
+        .like {
+            width: 70px;
+            height: 70px;
+
+            background: linear-gradient(
+                135deg,
+                #7c5cff,
+                #3478f6
+            );
+
+            border: none;
+
+            font-size: 28px;
+        }
+
+        .like:hover {
+            box-shadow: 0 12px 30px rgba(70,90,255,0.35);
+        }
+
+        .save:hover {
+            border-color: #fbbf24;
+            color: #fbbf24;
+        }
+
+
+        /* SWIPE TEXT */
+
+        .swipe-hint {
+            margin-top: 17px;
+
+            color: #606982;
+            font-size: 12px;
+            text-align: center;
+        }
+
+
+        /* NEXT JOBS */
+
+        .job-count {
+            margin-top: 25px;
+
+            color: #69718d;
+            font-size: 12px;
+        }
+
+
+        /* RESPONSIVE */
+
+        @media (max-width: 800px) {
+
+            .feed-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .nav-link {
+                display: none;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .container {
+                width: 94%;
+            }
+
+            .feed-header {
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .feed-header h1 {
+                font-size: 24px;
+            }
+
+            .job-card {
+                padding: 22px;
+            }
+
+            .job-title {
+                font-size: 20px;
+            }
+
+            .match {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+
+            .resume-box {
+                align-items: flex-start;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+ <!-- JOB AREA -->
+
+<section class="job-area">
+
+    {% for job in jobs %}
+
+        <!-- JOB CARD -->
+
+        <div class="job-card">
+
+            <div class="match">
+                92% Match
+            </div>
+
+            <!-- COMPANY -->
+
+            <div class="company-section">
+
+                <div class="company-logo">
+                    {{ job.company|first|upper }}
+                </div>
+
+                <div>
+
+                    <div class="company-name">
+                        {{ job.company }}
+                    </div>
+
+                    <h2 class="job-title">
+                        {{ job.title }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- JOB INFO -->
+
+            <div class="job-info">
+
+                <span class="info">
+                    💼 {{ job.get_job_type_display }}
+                </span>
+
+                <span class="info">
+                    📍 {{ job.location }}
+                </span>
+
+                <span class="info">
+                    🏠 {{ job.get_work_mode_display }}
+                </span>
+
+                {% if job.salary_min and job.salary_max %}
+                    <span class="info">
+                        💰 ₹{{ job.salary_min }} – ₹{{ job.salary_max }}
+                    </span>
+                {% endif %}
+
+                {% if job.duration %}
+                    <span class="info">
+                        🕐 {{ job.duration }}
+                    </span>
+                {% endif %}
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <p class="description">
+                {{ job.description }}
+            </p>
+
+
+            <!-- SKILLS -->
+
+            <div class="skills-title">
+                Required Skills
+            </div>
+
+            <div class="skills">
+
+                {% for skill in job.skills.split %}
+                    <span class="skill">
+                        {{ skill }}
+                    </span>
+                {% endfor %}
+
+            </div>
+
+
+            <!-- RESUME -->
+
+            <div class="resume-box">
+
+                <div class="resume-left">
+
+                    <div class="resume-icon">
+                        📄
+                    </div>
+
+                    <div class="resume-text">
+
+                        <h4>
+                            Your resume matches this job
+                        </h4>
+
+                        <p>
+                            We'll compare your skills with this job.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <button class="modify-btn">
+                    Modify Resume
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- SWIPE ACTIONS -->
+
+        <div class="swipe-actions">
+
+            <button
+                class="swipe-btn reject"
+                title="Not Interested"
+            >
+                ✕
+            </button>
+
+            <button
+                class="swipe-btn save"
+                title="Save Job"
+            >
+                ☆
+            </button>
+
+            <button
+                class="swipe-btn like"
+                title="Interested"
+            >
+                ♥
+            </button>
+
+        </div>
+
+
+        <div class="swipe-hint">
+
+            ← Not interested &nbsp;&nbsp; • &nbsp;&nbsp;
+            Save &nbsp;&nbsp; • &nbsp;&nbsp;
+            Interested →
+
+        </div>
+
+
+    {% empty %}
+
+        <p style="color: #858da9; text-align: center;">
+            No jobs available right now.
+        </p>
+
+    {% endfor %}
+
+
+    <div class="job-count">
+
+        Showing {{ jobs|length }} recommended jobs
+
+    </div>
+
+</section>
+</body>
+</html>
