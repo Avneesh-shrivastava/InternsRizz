@@ -11,8 +11,8 @@ def home_page(request):
     return render(request, 'home_page.html')
 
 def signup_view(request):
-    if request.user.is_authenticated:
-            return redirect("profile_setup")
+    # if request.user.is_authenticated:
+    #         return redirect("profile_setup")
 
     if request.method == "POST":
             print('form submitted')
@@ -51,8 +51,8 @@ def signup_view(request):
 
 def login_view(request):
 
-    if request.user.is_authenticated:
-        return redirect("job_feed")
+    # if request.user.is_authenticated:
+    #     return redirect("job_feed")
 
     if request.method == "POST":
         print('form submitted')
