@@ -92,7 +92,7 @@ def logout_view(request):
 
     return redirect("login")
 
-@login_required
+@login_required(login_url='/login-view/')
 def profile_setup(request):
 
     if request.method == "POST":
