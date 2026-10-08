@@ -20,6 +20,7 @@ from interns_app.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', home_page, name="homepage"),
     path('home-page/', home_page, name="homepage"),
     path('signup-view/', signup_view, name="signup_view"),
     path('login-view/', login_view, name="login_view"), 
