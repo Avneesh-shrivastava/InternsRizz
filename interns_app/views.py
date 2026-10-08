@@ -136,7 +136,7 @@ def profile_setup(request):
 
         profile.save()
 
-        return redirect("profile_setup")
+        return redirect("job_feed")
 
     return render(request, "profile_setup.html")
 
