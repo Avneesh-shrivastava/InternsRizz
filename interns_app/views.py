@@ -140,7 +140,7 @@ def profile_setup(request):
 
     return render(request, "profile_setup.html")
 
-@login_required
+@login_required(login_url='/login-view/')
 def job_feed(request):
 
     jobs = Job.objects.all()
