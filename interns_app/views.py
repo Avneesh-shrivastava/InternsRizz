@@ -72,7 +72,7 @@ def login_view(request):
 
             login(request, user)
             print("logged_in")
-            return redirect("profile_setup")
+            return redirect("job_feed")
 
         else:
 
