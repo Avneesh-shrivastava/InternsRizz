@@ -6,7 +6,7 @@ from .models import Profile
 from django.contrib.auth.decorators import login_required
 from .models import Job
 import json
-
+from django.http import JsonResponse
 
 # Create your views here.
 def home_page(request):
