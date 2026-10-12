@@ -5,6 +5,8 @@ from django.contrib import messages
 from .models import Profile
 from django.contrib.auth.decorators import login_required
 from .models import Job
+import json
+
 
 # Create your views here.
 def home_page(request):
@@ -142,8 +144,16 @@ def profile_setup(request):
 
 @login_required(login_url='/login-view/')
 def job_feed(request):
-
+    data = json.loads(request.body)
     jobs = Job.objects.all()
+    # job_id = data.get("job_id")
+    decision = data.get("decision")
+
+    if decision not in ["interested", "not_interested", "saved"]:
+        return JsonResponse(
+            {"error": "Invalid decision."},
+            status=400
+        )
 
     return render(
         request,
