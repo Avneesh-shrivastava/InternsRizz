@@ -149,3 +149,47 @@ def job_feed(request):
     return render(request, "job_feed.html", {
         "jobs": jobs
     })
+
+def swipe_job(request):
+    try:
+        data = json.loads(request.body)
+        job_id = data.get("job_id")
+        decision = data.get("decision")
+
+        if decision not in [
+            "interested",
+            "not_interested",
+            "saved",
+        ]:
+            return JsonResponse(
+                {"error": "Invalid decision."},
+                status=400,
+            )
+
+        job = Job.objects.get(
+            id=job_id,
+            is_active=True,
+        )
+
+        swipe, created = JobSwipe.objects.update_or_create(
+            user=request.user,
+            job=job,
+            defaults={"decision": decision},
+        )
+
+        return JsonResponse({
+            "success": True,
+            "decision": swipe.decision,
+        })
+
+    except (json.JSONDecodeError, TypeError, ValueError):
+        return JsonResponse(
+            {"error": "Invalid request data."},
+            status=400,
+        )
+
+    except Job.DoesNotExist:
+        return JsonResponse(
+            {"error": "Job not found."},
+            status=404,
+        )
