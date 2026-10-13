@@ -553,180 +553,111 @@
 
  <!-- JOB AREA -->
 
-<section class="job-area">
+<section class="job-area" id="job-feed">
 
     {% for job in jobs %}
+
+    <div class="job-item" data-job-id="{{ job.id }}"
+         {% if not forloop.first %}hidden{% endif %}>
 
         <!-- JOB CARD -->
 
         <div class="job-card">
 
-            <div class="match">
-                92% Match
-            </div>
-
-            <!-- COMPANY -->
+            <div class="match">92% Match</div>
 
             <div class="company-section">
-
                 <div class="company-logo">
                     {{ job.company|first|upper }}
                 </div>
 
                 <div>
-
-                    <div class="company-name">
-                        {{ job.company }}
-                    </div>
-
-                    <h2 class="job-title">
-                        {{ job.title }}
-                    </h2>
-
+                    <div class="company-name">{{ job.company }}</div>
+                    <h2 class="job-title">{{ job.title }}</h2>
                 </div>
-
             </div>
-
 
             <!-- JOB INFO -->
 
             <div class="job-info">
-
-                <span class="info">
-                    💼 {{ job.get_job_type_display }}
-                </span>
-
-                <span class="info">
-                    📍 {{ job.location }}
-                </span>
-
-                <span class="info">
-                    🏠 {{ job.get_work_mode_display }}
-                </span>
+                <span class="info">💼 {{ job.get_job_type_display }}</span>
+                <span class="info">📍 {{ job.location }}</span>
+                <span class="info">🏠 {{ job.get_work_mode_display }}</span>
 
                 {% if job.salary_min and job.salary_max %}
-                    <span class="info">
-                        💰 ₹{{ job.salary_min }} – ₹{{ job.salary_max }}
-                    </span>
+                <span class="info">
+                    💰 ₹{{ job.salary_min }} – ₹{{ job.salary_max }}
+                </span>
                 {% endif %}
 
                 {% if job.duration %}
-                    <span class="info">
-                        🕐 {{ job.duration }}
-                    </span>
+                <span class="info">🕐 {{ job.duration }}</span>
                 {% endif %}
-
             </div>
 
+            <p class="description">{{ job.description }}</p>
 
-            <!-- DESCRIPTION -->
-
-            <p class="description">
-                {{ job.description }}
-            </p>
-
-
-            <!-- SKILLS -->
-
-            <div class="skills-title">
-                Required Skills
-            </div>
+            <div class="skills-title">Required Skills</div>
 
             <div class="skills">
-
-                {% for skill in job.skills.split %}
-                    <span class="skill">
-                        {{ skill }}
-                    </span>
-                {% endfor %}
-
+                {{ job.skills }}
             </div>
-
 
             <!-- RESUME -->
 
             <div class="resume-box">
-
                 <div class="resume-left">
-
-                    <div class="resume-icon">
-                        📄
-                    </div>
+                    <div class="resume-icon">📄</div>
 
                     <div class="resume-text">
-
-                        <h4>
-                            Your resume matches this job
-                        </h4>
-
-                        <p>
-                            We'll compare your skills with this job.
-                        </p>
-
+                        <h4>Your resume matches this job</h4>
+                        <p>We'll compare your skills with this job.</p>
                     </div>
-
                 </div>
 
-                <button class="modify-btn">
+                <button type="button" class="modify-btn">
                     Modify Resume
                 </button>
-
             </div>
 
         </div>
-
 
         <!-- SWIPE ACTIONS -->
 
         <div class="swipe-actions">
 
-            <button
-                class="swipe-btn reject"
-                title="Not Interested"
-            >
+            <button type="button"
+                    class="swipe-btn reject"
+                    data-decision="not_interested"
+                    title="Not Interested">
                 ✕
             </button>
 
-            <button
-                class="swipe-btn save"
-                title="Save Job"
-            >
+            <button type="button"
+                    class="swipe-btn save"
+                    data-decision="saved"
+                    title="Save Job">
                 ☆
             </button>
 
-            <button
-                class="swipe-btn like"
-                title="Interested"
-            >
+            <button type="button"
+                    class="swipe-btn like"
+                    data-decision="interested"
+                    title="Interested">
                 ♥
             </button>
 
         </div>
 
-
         <div class="swipe-hint">
-
-            ← Not interested &nbsp;&nbsp; • &nbsp;&nbsp;
-            Save &nbsp;&nbsp; • &nbsp;&nbsp;
-            Interested →
-
+            ← Not interested &nbsp; • &nbsp; Save &nbsp; • &nbsp; Interested →
         </div>
 
+    </div>
 
     {% empty %}
-
-        <p style="color: #858da9; text-align: center;">
-            No jobs available right now.
-        </p>
-
+        <p>No jobs available right now.</p>
     {% endfor %}
-
-
-    <div class="job-count">
-
-        Showing {{ jobs|length }} recommended jobs
-
-    </div>
 
 </section>
 
