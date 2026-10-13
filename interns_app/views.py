@@ -144,61 +144,8 @@ def profile_setup(request):
 
 @login_required(login_url='/login-view/')
 def job_feed(request):
-    data = json.loads(request.body)
-    jobs = Job.objects.all()
-    # job_id = data.get("job_id")
-    decision = data.get("decision")
+    jobs = Job.objects.filter(is_active=True)
 
-    try:
-        # Read the data sent by JavaScript fetch()
-        data = json.loads(request.body)
-
-        job_id = data.get("job_id")
-        decision = data.get("decision")
-
-        # Validate the decision
-        if decision not in [
-            "interested",
-            "not_interested",
-            "saved"
-        ]:
-            return JsonResponse(
-                {"error": "Invalid decision."},
-                status=400
-            )
-
-        # Find the job
-        job = Job.objects.get(id=job_id, is_active=True)
-
-        # Save or update the user's decision
-        swipe, created = JobSwipe.objects.update_or_create(
-            user=request.user,
-            job=job,
-            defaults={"decision": decision}
-        )
-
-        return JsonResponse({
-            "success": True,
-            "decision": swipe.decision
-        })
-
-    except (json.JSONDecodeError, TypeError, ValueError):
-        return JsonResponse(
-            {"error": "Invalid request data."},
-            status=400
-        )
-
-    except Job.DoesNotExist:
-        return JsonResponse(
-            {"error": "Job not found."},
-            status=404
-        )
-
-
-    return render(
-        request,
-        "job_feed.html",
-        {
-            "jobs": jobs
-        }
-    )
+    return render(request, "job_feed.html", {
+        "jobs": jobs
+    })
