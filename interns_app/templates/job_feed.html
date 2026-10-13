@@ -692,7 +692,7 @@ document.addEventListener("DOMContentLoaded", () => {
         buttons.forEach(button => button.disabled = true);
 
         try {
-            const response = await fetch("/job-feed/", {
+            const response = await fetch("/swipe-job/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
