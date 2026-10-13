@@ -51,57 +51,69 @@ class Job(models.Model):
 
     description = models.TextField()
 
-    skills = models.TextField(
-        help_text="Enter skills separated by commas"
-    )
+    skills = models.TextField(help_text="Enter skills separated by commas")
 
     location = models.CharField(max_length=100)
 
-    job_type = models.CharField(
-        max_length=20,
-        choices=JOB_TYPE_CHOICES
-    )
+    job_type = models.CharField(max_length=20, choices=JOB_TYPE_CHOICES)
 
-    work_mode = models.CharField(
-        max_length=20,
-        choices=WORK_MODE_CHOICES
-    )
+    work_mode = models.CharField(max_length=20, choices=WORK_MODE_CHOICES)
 
-    experience = models.CharField(
-        max_length=20,
-        choices=EXPERIENCE_CHOICES
-    )
+    experience = models.CharField( max_length=20, choices=EXPERIENCE_CHOICES)
 
-    salary_min = models.PositiveIntegerField(
-        null=True,
-        blank=True
-    )
+    salary_min = models.PositiveIntegerField(null=True, blank=True)
 
-    salary_max = models.PositiveIntegerField(
-        null=True,
-        blank=True
-    )
+    salary_max = models.PositiveIntegerField(null=True,blank=True)
 
-    duration = models.CharField(
-        max_length=100,
-        blank=True
-    )
+    duration = models.CharField(max_length=100,blank=True)
 
-    application_url = models.URLField(
-        blank=True
-    )
+    application_url = models.URLField(blank=True)
 
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
+    created_at = models.DateTimeField(auto_now_add=True)
 
-    updated_at = models.DateTimeField(
-        auto_now=True
-    )
+    updated_at = models.DateTimeField(auto_now=True)
 
-    is_active = models.BooleanField(
-        default=True
-    )
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.title} - {self.company}"
+
+
+class JobSwipe(models.Model):
+
+    DECISION_CHOICES = [
+        ("interested", "Interested"),
+        ("not_interested", "Not Interested"),
+        ("saved", "Saved"),
+    ]
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="job_swipes"
+    )
+
+    job = models.ForeignKey(
+        "Job",
+        on_delete=models.CASCADE,
+        related_name="user_swipes"
+    )
+
+    decision = models.CharField(
+        max_length=20,
+        choices=DECISION_CHOICES
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "job"],
+                name="unique_user_job_swipe"
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.user.username} - {self.job.title} - {self.decision}"
