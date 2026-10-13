@@ -26,4 +26,5 @@ urlpatterns = [
     path('login-view/', login_view, name="login_view"), 
     path('profile-setup/', profile_setup, name="profile_setup"),
     path("job-feed/", job_feed, name="job_feed"),
+    path("swipe-job/", swipe_job, name="swipe_job")
 ]
