@@ -545,10 +545,151 @@
             color: #eab308;
         }
 
+
+/* ===== NAVBAR ===== */
+nav {
+    height: 72px;
+    padding: 0 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: rgba(8, 11, 24, 0.90);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+}
+
+/* Brand Logo */
+.logo {
+    font-size: 26px;
+    font-weight: 800;
+    text-decoration: none;
+    letter-spacing: -1px;
+
+    background: linear-gradient(90deg, #a78bfa, #ec4899);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* Right Side Navigation */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Navigation Links */
+.nav-link {
+    color: #a1a1b5;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.25s ease;
+}
+
+.nav-link:hover {
+    color: #ffffff;
+}
+
+/* Active Navigation Link */
+.nav-link.active {
+    color: #a78bfa;
+}
+
+/* Profile Button */
+.profile {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.profile:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 800px) {
+    nav {
+        padding: 0 4%;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .nav-right {
+        gap: 16px;
+    }
+
+    .nav-link {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 500px) {
+    nav {
+        height: 64px;
+    }
+
+    .nav-right {
+        gap: 12px;
+    }
+
+    .nav-link {
+        display: none;
+    }
+
+    .profile {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+
+
+
+
     </style>
 </head>
 
 <body>
+
+    
+    <!-- TOP NAVBAR -->
+    <nav>
+        <a href="{% url 'home_page' %}" class="logo">Interns Rizz</a>
+
+        <div class="nav-right">
+            <a href="{% url 'job_feed' %}" class="nav-link">Find Jobs</a>
+            <a href="{% url '' %}" class="nav-link">Saved Jobs</a>
+            <a href="{% url '' %}" class="nav-link">Applications</a>
+
+            <a href="{% url '' %}" class="profile" title="My Profile">
+                {{ request.user.username|first|upper }}
+            </a>
+        </div>
+    </nav>
+
+
+
 
 
  <!-- JOB AREA -->
