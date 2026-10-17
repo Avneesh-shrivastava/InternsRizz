@@ -193,3 +193,14 @@ def swipe_job(request):
             {"error": "Job not found."},
             status=404,
         )
+
+
+@login_required
+def profile_view(request):
+    profile, created = Profile.objects.get_or_create(
+        user=request.user
+    )
+
+    return render(request, "profile.html", {
+        "profile": profile
+    })
