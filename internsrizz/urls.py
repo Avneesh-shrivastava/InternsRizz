@@ -28,4 +28,5 @@ urlpatterns = [
     path("job-feed/", job_feed, name="job_feed"),
     path("swipe-job/", swipe_job, name="swipe_job"),
     path("profile/", profile_view, name="profile"),
+    path("saved-jobs/", saved_jobs_view, name="saved_jobs_view"),
 ]
