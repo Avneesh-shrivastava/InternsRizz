@@ -204,3 +204,16 @@ def profile_view(request):
     return render(request, "profile.html", {
         "profile": profile
     })
+
+@login_required
+def saved_jobs_view(request):
+    saved_jobs = (
+        JobSwipe.objects
+        .filter(user=request.user, decision="saved", job__is_active=True)
+        .select_related("job")
+        .order_by("-updated_at")
+    )
+
+    return render(request, "saved_jobs.html", {
+        "saved_jobs": saved_jobs
+    })
