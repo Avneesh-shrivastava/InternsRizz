@@ -65,8 +65,8 @@ def login_view(request):
 
         user = authenticate(
             request,
-            username=username,
-            password=password
+            username=username.strip(),
+            password=password.strip()
         )
         print(user)
 
