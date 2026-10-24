@@ -110,6 +110,7 @@ def profile_setup(request):
         experience = request.POST.get("experience")
 
         skills = request.POST.get("skills")
+        
         about = request.POST.get("about")
 
         resume = request.FILES.get("resume")
@@ -144,7 +145,7 @@ def profile_setup(request):
 
 @login_required(login_url='/login-view/')
 def job_feed(request):
-    jobs = Job.objects.filter(is_active=True)
+    jobs = Job.objects.filter(is_active=True, )
 
     return render(request, "job_feed.html", {
         "jobs": jobs
