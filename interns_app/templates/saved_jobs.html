@@ -485,7 +485,7 @@
 
                             <div class="card-actions">
                                 {% if job.application_url %}
-                                    <a href="{{ job.application_url }}"
+                                    <a href=""
                                        target="_blank"
                                        rel="noopener noreferrer"
                                        class="apply-btn">
@@ -494,7 +494,7 @@
                                 {% endif %}
 
                                 <form method="post"
-                                      action="{% url 'remove_saved_job' job.id %}">
+                                      action="">
                                     {% csrf_token %}
                                     <button type="submit" class="remove-btn">
                                         Remove
@@ -523,7 +523,7 @@
                     and it will appear here for you to revisit.
                 </p>
 
-                <a href="{% url 'job_feed' %}" class="discover-btn">
+                <a href="" class="discover-btn">
                     Discover Jobs →
                 </a>
             </section>
