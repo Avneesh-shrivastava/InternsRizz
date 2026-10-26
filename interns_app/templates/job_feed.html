@@ -675,7 +675,7 @@ nav {
     
     <!-- TOP NAVBAR -->
     <nav>
-        <a href="/home-page" class="logo">Interns Rizz</a>
+        <a href="/home-page" class="logo">Jobs 2 Swipe</a>
 
         <div class="nav-right">
             <a href="{% url 'job_feed' %}" class="nav-link">Find Jobs</a>
@@ -850,12 +850,16 @@ document.addEventListener("DOMContentLoaded", () => {
             if (decision === "saved") {
                 clickedButton.textContent = "★";
                 clickedButton.classList.add("is-saved");
-                return; // Keep showing the current job.
+                currentItem.hidden = true;
+                currentIndex++;
+                 // Keep showing the current job.
             }
 
             // Move to the next job only after the server confirms success.
-            currentItem.hidden = true;
-            currentIndex++;
+            if (dicision !== "saved"){
+                currentItem.hidden = true;
+                currentIndex++;
+            }
 
             if (currentIndex < items.length) {
                 items[currentIndex].hidden = false;
