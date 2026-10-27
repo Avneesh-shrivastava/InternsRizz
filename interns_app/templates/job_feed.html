@@ -667,6 +667,48 @@ nav {
 
 
 
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 230px;
+}
+
+.form-group label {
+    color: #e5e7eb;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #303858;
+    border-radius: 12px;
+    outline: none;
+    background-color: #11162a;
+    color: #e5e7eb;
+    font-size: 14px;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: auto;
+}
+
+.form-group select:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+.form-group select option {
+    background-color: #11162a;
+    color: #e5e7eb;
+}
+
+
+
+
+
+
 
     </style>
 </head>
@@ -678,6 +720,7 @@ nav {
     <nav>
         <a href="/home-page" class="logo">Jobs 2 Swipe</a>
 
+
         <div class="nav-right">
            
             <a href="/saved-jobs" class="nav-link">Saved Jobs</a>
@@ -688,6 +731,43 @@ nav {
             </a>
         </div>
     </nav>
+
+<!-- select the job role -->
+
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <!-- <label for="job-role">Preferred Job Role</label> -->
+
+            <select
+                name="preferred_role"
+                id="job-role"
+                required
+                onchange="this.form.submit()"
+            >
+                <option value="" disabled selected>
+                    Select your preferred role
+                </option>
+                <option value="Python Developer">Python Developer</option>
+                <option value="Django Developer">Django Developer</option>
+                <option value="React Developer">React Developer</option>
+                <option value="Frontend Developer">Frontend Developer</option>
+                <option value="Backend Developer">Backend Developer</option>
+                <option value="Full Stack Developer">Full Stack Developer</option>
+                <option value="Software Developer">Software Developer</option>
+                <option value="Data Analyst">Data Analyst</option>
+                <option value="Data Engineer">Data Engineer</option>
+                <option value="AI/ML Engineer">AI/ML Engineer</option>
+                <option value="DevOps Engineer">DevOps Engineer</option>
+                <option value="Cybersecurity Analyst">Cybersecurity Analyst</option>
+                <option value="QA Engineer">QA Engineer</option>
+                <option value="UI/UX Designer">UI/UX Designer</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+    </form>
+
 
  <!-- JOB AREA -->
 
