@@ -148,8 +148,9 @@ def job_feed(request):
     curr_job_role = ""
     if request.method == "POST":
         curr_job_role = request.POST.get('preferred_role')
-        
+        return redirect(f"/job-feed/?role={curr_job_role}")
 
+    curr_job_role = request.GET.get("role", "")
     jobs = Job.objects.filter(is_active=True,job_role=curr_job_role )
     return render(request, "job_feed.html", {
         "jobs": jobs,
