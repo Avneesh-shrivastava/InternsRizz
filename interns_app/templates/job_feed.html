@@ -747,9 +747,11 @@ nav {
                 onchange="this.form.submit()"
             >
                 <option value="" disabled selected>
-                    <!-- Select your preferred role -->
-                     {{ curr_job_role }}
-                     
+                {% if curr_job_role == "" %}
+                    Select your preferred role
+                {% else %}
+                    {{ curr_job_role }}
+                {% endif %}   
 
                 </option>
                 <option value="Python Developer">Python Developer</option>
