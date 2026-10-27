@@ -145,9 +145,11 @@ def profile_setup(request):
 
 @login_required(login_url='/login-view/')
 def job_feed(request):
+    global curr_job_role
     if request.method == "POST":
+
         curr_job_role = request.POST.get('preferred_role')
-        print(curr_job_role)
+        
     
     jobs = Job.objects.filter(is_active=True, )
     return render(request, "job_feed.html", {
