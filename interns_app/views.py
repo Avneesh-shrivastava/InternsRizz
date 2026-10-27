@@ -145,10 +145,14 @@ def profile_setup(request):
 
 @login_required(login_url='/login-view/')
 def job_feed(request):
+    if request.method == "POST":
+        curr_job_role = request.POST.get('preferred_role')
+        print(curr_job_role)
+    
     jobs = Job.objects.filter(is_active=True, )
-
     return render(request, "job_feed.html", {
-        "jobs": jobs
+        "jobs": jobs,
+        "curr_job_role" : curr_job_role 
     })
 
 def swipe_job(request):
