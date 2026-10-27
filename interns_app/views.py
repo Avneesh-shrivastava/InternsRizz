@@ -147,11 +147,10 @@ def profile_setup(request):
 def job_feed(request):
     curr_job_role = ""
     if request.method == "POST":
-
         curr_job_role = request.POST.get('preferred_role')
         
-    
-    jobs = Job.objects.filter(is_active=True, )
+
+    jobs = Job.objects.filter(is_active=True,job_role=curr_job_role )
     return render(request, "job_feed.html", {
         "jobs": jobs,
         "curr_job_role" : curr_job_role 

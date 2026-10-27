@@ -75,6 +75,8 @@ class Job(models.Model):
 
     is_active = models.BooleanField(default=True)
 
+    job_role = models.CharField(default=True)
+
     def __str__(self):
         return f"{self.title} - {self.company}"
 
