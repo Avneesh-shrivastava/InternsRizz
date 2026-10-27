@@ -734,7 +734,7 @@ nav {
 
 <!-- select the job role -->
 
-    <form method="POST" action="">
+    <form method="POST" action="{% url 'job_feed' %}">
         {% csrf_token %}
 
         <div class="form-group">
@@ -747,7 +747,10 @@ nav {
                 onchange="this.form.submit()"
             >
                 <option value="" disabled selected>
-                    Select your preferred role
+                    <!-- Select your preferred role -->
+                     {{ curr_job_role }}
+                     
+
                 </option>
                 <option value="Python Developer">Python Developer</option>
                 <option value="Django Developer">Django Developer</option>
