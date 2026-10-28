@@ -210,7 +210,6 @@ def profile_view(request):
     profile, created = Profile.objects.get_or_create(
         user=request.user
     )
-
     return render(request, "profile.html", {
         "profile": profile
     })
@@ -227,3 +226,6 @@ def saved_jobs_view(request):
     return render(request, "saved_jobs.html", {
         "saved_jobs": saved_jobs
     })
+
+def applications(request):
+    return render(request, "applications.html")
