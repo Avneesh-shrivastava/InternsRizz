@@ -229,4 +229,4 @@ def saved_jobs_view(request):
 
 def interested_jobs(request):
     # job = JobSwipe.objects.filter(user_id=request.user, decision="applied") 
-    return render(request, "applications.html")
+    return render(request, "interested_jobs.html")
