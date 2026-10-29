@@ -227,5 +227,6 @@ def saved_jobs_view(request):
         "saved_jobs": saved_jobs
     })
 
-def applications(request):
+def interested_jobs(request):
+    # job = JobSwipe.objects.filter(user_id=request.user, decision="applied") 
     return render(request, "applications.html")
