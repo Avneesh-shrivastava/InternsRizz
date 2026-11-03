@@ -248,3 +248,9 @@ def interested_jobs(request):
     return render(request, "interested_jobs.html", {
         "interested_jobs": interested_jobs
     })
+
+def interested_jobs_del(request, job_id):
+    interested_job = JobSwipe.objects.get(id=job_id)
+    interested_job.decision = 'saved'
+    interested_job.save()
+    return redirect("interested_jobs")
