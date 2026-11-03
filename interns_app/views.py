@@ -228,6 +228,23 @@ def saved_jobs_view(request):
     })
 
 def interested_jobs(request):
-    job = JobSwipe.objects.filter(user_id=request.user, decision="interested") 
-    print(job)
-    return render(request, "interested_jobs.html")
+    interested_jobs = JobSwipe.objects.filter(
+            user=request.user,
+            decision="interested",
+            job__is_active=True
+        ).select_related("job").order_by("-updated_at")
+
+    if request.method == "POST":
+            job_id = request.POST.get("job_id")
+
+            JobSwipe.objects.filter(
+                user=request.user,
+                job_id=job_id,
+                decision="interested"
+            ).update(decision="not_interested")
+
+            return redirect(request.path)
+
+    return render(request, "interested_jobs.html", {
+        "interested_jobs": interested_jobs
+    })
