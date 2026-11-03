@@ -424,17 +424,17 @@
                             Apply Now
                         </a>
 
-                        <form method="POST" action="">
+                        <!-- <form method="POST" action="">
                             {% csrf_token %}
                             <input type="hidden" name="job_id"
                                    value="{{ swipe.job.id }}">
                             <input type="hidden" name="decision"
-                                   value="not_interested">
+                                   value="not_interested"> -->
 
-                            <button type="submit" class="btn remove-btn">
+                            <a href="/interested-jobs-del/{{ swipe.id }}"><button type="submit" class="btn remove-btn">
                                 Remove
-                            </button>
-                        </form>
+                            </button></a>
+                        <!-- </form> -->
 
                     </div>
 
