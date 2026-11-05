@@ -31,4 +31,5 @@ urlpatterns = [
     path("saved-jobs/", saved_jobs_view, name="saved_jobs_view"),
     path("interested-jobs/", interested_jobs, name="interested_jobs"),
     path("interested-jobs-del/<int:job_id>/", interested_jobs_del, name="interested_jobs_del"),
+    path("edit-profile/", edit_profile, name="edit_profile"),
 ]

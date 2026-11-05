@@ -227,6 +227,7 @@ def saved_jobs_view(request):
         "saved_jobs": saved_jobs
     })
 
+
 def interested_jobs(request):
     interested_jobs = JobSwipe.objects.filter(
             user=request.user,
@@ -254,6 +255,8 @@ def interested_jobs_del(request, job_id):
     interested_job.decision = 'saved'
     interested_job.save()
     return redirect("interested_jobs")
+
+
 
 @login_required
 def edit_profile(request):
