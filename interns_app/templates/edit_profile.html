@@ -1,0 +1,581 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile | Jobs 2 Swipe</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #080b18;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+
+        .navbar {
+            height: 75px;
+            padding: 0 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0c1020;
+            border-bottom: 1px solid #202640;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            background: linear-gradient(90deg, #a78bfa, #3b82f6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: #a7aec5;
+            text-decoration: none;
+            font-size: 14px;
+            transition: .2s;
+        }
+
+        .nav-links a:hover {
+            color: #a78bfa;
+        }
+
+        /* Main Container */
+
+        .container {
+            max-width: 900px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+
+        .page-heading {
+            margin-bottom: 25px;
+        }
+
+        .page-heading h1 {
+            font-size: 30px;
+            margin-bottom: 9px;
+        }
+
+        .page-heading p {
+            color: #929bb5;
+            font-size: 14px;
+        }
+
+        /* Form Card */
+
+        .form-card {
+            background: #11162a;
+            border: 1px solid #252c45;
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            margin-bottom: 20px;
+            padding-bottom: 13px;
+            border-bottom: 1px solid #29304a;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            color: #c3c9da;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            background: #0b1021;
+            border: 1px solid #303852;
+            color: white;
+            padding: 13px 14px;
+            border-radius: 9px;
+            outline: none;
+            font-size: 14px;
+            transition: .2s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, .12);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #68718d;
+        }
+
+        select option {
+            background: #11162a;
+            color: white;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 110px;
+            line-height: 1.6;
+        }
+
+        /* Resume Upload */
+
+        .resume-box {
+            background: #0b1021;
+            border: 1px dashed #55517e;
+            border-radius: 11px;
+            padding: 20px;
+        }
+
+        .current-resume {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+
+        .resume-name {
+            color: #b9c1d7;
+            font-size: 13px;
+        }
+
+        .resume-name span {
+            color: #a78bfa;
+        }
+
+        .upload-label {
+            display: inline-block;
+            padding: 11px 16px;
+            border: 1px solid #7654c9;
+            border-radius: 8px;
+            color: #c4b5fd;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .upload-label:hover {
+            background: #211b3c;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-info {
+            color: #78829e;
+            font-size: 11px;
+            margin-top: 12px;
+        }
+
+        /* Buttons */
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            border-top: 1px solid #29304a;
+            padding-top: 24px;
+        }
+
+        .btn {
+            padding: 12px 22px;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            border: none;
+        }
+
+        .cancel-btn {
+            background: #20263b;
+            color: #c3c9da;
+        }
+
+        .save-btn {
+            background: linear-gradient(90deg, #8b5cf6, #3478f6);
+            color: white;
+        }
+
+        .save-btn:hover {
+            opacity: .9;
+        }
+
+        .cancel-btn:hover {
+            background: #303852;
+        }
+
+        /* Responsive */
+
+        @media(max-width: 650px) {
+            .navbar {
+                padding: 0 5%;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 11px;
+            }
+
+            .container {
+                margin: 30px auto;
+            }
+
+            .page-heading h1 {
+                font-size: 25px;
+            }
+
+            .form-card {
+                padding: 20px 16px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+            }
+
+            .form-actions .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Jobs <span>2</span> Swipe</div>
+
+        <div class="nav-links">
+            <a href="">Dashboard</a>
+            <a href="">Job Feed</a>
+            <a href="">Applications</a>
+            <a href="">Profile</a>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <div class="page-heading">
+            <h1>Edit Profile</h1>
+            <p>Update your information to get better job recommendations.</p>
+        </div>
+
+        <form method="POST" action="" enctype="multipart/form-data"
+              class="form-card">
+
+            {% csrf_token %}
+
+            <!-- Personal Information -->
+
+            <div class="section">
+                <h2 class="section-title">Personal Information</h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" name="full_name"
+                               value="{{ request.user.get_full_name }}"
+                               placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email"
+                               value="{{ request.user.email }}"
+                               disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" name="phone"
+                               value="{{ profile.phone }}"
+                               placeholder="Enter phone number">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" name="location"
+                               value="{{ profile.location }}"
+                               placeholder="e.g. Indore, Madhya Pradesh">
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Professional Information -->
+
+            <div class="section">
+                <h2 class="section-title">Professional Information</h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Preferred Job Role</label>
+                        <select name="preferred_role">
+                            <option value="">Select a role</option>
+
+                            <option value="Python Developer"
+                                {% if profile.preferred_role == "Python Developer" %}selected{% endif %}>
+                                Python Developer
+                            </option>
+
+                            <option value="Django Developer"
+                                {% if profile.preferred_role == "Django Developer" %}selected{% endif %}>
+                                Django Developer
+                            </option>
+
+                            <option value="React Developer"
+                                {% if profile.preferred_role == "React Developer" %}selected{% endif %}>
+                                React Developer
+                            </option>
+
+                            <option value="Frontend Developer"
+                                {% if profile.preferred_role == "Frontend Developer" %}selected{% endif %}>
+                                Frontend Developer
+                            </option>
+
+                            <option value="Backend Developer"
+                                {% if profile.preferred_role == "Backend Developer" %}selected{% endif %}>
+                                Backend Developer
+                            </option>
+
+                            <option value="Full Stack Developer"
+                                {% if profile.preferred_role == "Full Stack Developer" %}selected{% endif %}>
+                                Full Stack Developer
+                            </option>
+
+                            <option value="Software Developer"
+                                {% if profile.preferred_role == "Software Developer" %}selected{% endif %}>
+                                Software Developer
+                            </option>
+
+                            <option value="Data Analyst"
+                                {% if profile.preferred_role == "Data Analyst" %}selected{% endif %}>
+                                Data Analyst
+                            </option>
+
+                            <option value="Other"
+                                {% if profile.preferred_role == "Other" %}selected{% endif %}>
+                                Other
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Education</label>
+                        <select name="education">
+                            <option value="">Select education</option>
+
+                            <option value="BCA"
+                                {% if profile.education == "BCA" %}selected{% endif %}>
+                                BCA
+                            </option>
+
+                            <option value="MCA"
+                                {% if profile.education == "MCA" %}selected{% endif %}>
+                                MCA
+                            </option>
+
+                            <option value="B.Tech"
+                                {% if profile.education == "B.Tech" %}selected{% endif %}>
+                                B.Tech
+                            </option>
+
+                            <option value="M.Tech"
+                                {% if profile.education == "M.Tech" %}selected{% endif %}>
+                                M.Tech
+                            </option>
+
+                            <option value="Other"
+                                {% if profile.education == "Other" %}selected{% endif %}>
+                                Other
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>College / University</label>
+                        <input type="text" name="college"
+                               value="{{ profile.college }}"
+                               placeholder="Enter college name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Graduation Year</label>
+                        <input type="number" name="graduation_year"
+                               value="{{ profile.graduation_year|default_if_none:'' }}"
+                               placeholder="e.g. 2027">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Experience</label>
+                        <select name="experience">
+                            <option value="">Select experience</option>
+
+                            <option value="Fresher"
+                                {% if profile.experience == "Fresher" %}selected{% endif %}>
+                                Fresher
+                            </option>
+
+                            <option value="Less than 1 year"
+                                {% if profile.experience == "Less than 1 year" %}selected{% endif %}>
+                                Less than 1 year
+                            </option>
+
+                            <option value="1-2 years"
+                                {% if profile.experience == "1-2 years" %}selected{% endif %}>
+                                1-2 years
+                            </option>
+
+                            <option value="2-3 years"
+                                {% if profile.experience == "2-3 years" %}selected{% endif %}>
+                                2-3 years
+                            </option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Skills -->
+
+            <div class="section">
+                <h2 class="section-title">Skills & About</h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group full">
+                        <label>Skills</label>
+                        <textarea name="skills"
+                                  placeholder="e.g. Python, Django, React, HTML, CSS, JavaScript">{{ profile.skills }}</textarea>
+                    </div>
+
+                    <div class="form-group full">
+                        <label>About Yourself</label>
+                        <textarea name="about"
+                                  placeholder="Write a short introduction about yourself...">{{ profile.about }}</textarea>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Resume -->
+
+            <div class="section">
+                <h2 class="section-title">Resume</h2>
+
+                <div class="resume-box">
+
+                    <div class="current-resume">
+                        <div class="resume-name">
+                            Current Resume:
+                            {% if profile.resume %}
+                                <span>{{ profile.resume.name }}</span>
+                            {% else %}
+                                <span>No resume uploaded</span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <label for="resume" class="upload-label">
+                        Choose New Resume
+                    </label>
+
+                    <input type="file" id="resume" name="resume"
+                           accept=".pdf,.doc,.docx">
+
+                    <p class="file-info">
+                        Supported formats: PDF, DOC, DOCX.
+                    </p>
+
+                    <p id="fileName" class="file-info"></p>
+
+                </div>
+            </div>
+
+            <!-- Actions -->
+
+            <div class="form-actions">
+                <a href="" class="btn cancel-btn">Cancel</a>
+                <button type="submit" class="btn save-btn">
+                    Save Changes
+                </button>
+            </div>
+
+        </form>
+
+    </main>
+
+    <script>
+        const resumeInput = document.getElementById("resume");
+        const fileName = document.getElementById("fileName");
+
+        resumeInput.addEventListener("change", function () {
+            if (this.files.length > 0) {
+                fileName.textContent = "Selected: " + this.files[0].name;
+            } else {
+                fileName.textContent = "";
+            }
+        });
+    </script>
+
+</body>
+</html>
