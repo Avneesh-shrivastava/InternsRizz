@@ -254,3 +254,31 @@ def interested_jobs_del(request, job_id):
     interested_job.decision = 'saved'
     interested_job.save()
     return redirect("interested_jobs")
+
+@login_required
+def edit_profile(request):
+    profile, created = Profile.objects.get_or_create(
+        user=request.user
+    )
+
+    if request.method == "POST":
+        profile.phone = request.POST.get("phone", "")
+        profile.location = request.POST.get("location", "")
+        profile.preferred_role = request.POST.get("preferred_role", "")
+        profile.education = request.POST.get("education", "")
+        profile.college = request.POST.get("college", "")
+        profile.graduation_year = request.POST.get("graduation_year") or None
+        profile.experience = request.POST.get("experience", "")
+        profile.skills = request.POST.get("skills", "")
+        profile.about = request.POST.get("about", "")
+
+        if request.FILES.get("resume"):
+            profile.resume = request.FILES["resume"]
+
+        profile.save()
+
+        return redirect("profile_page")
+
+    return render(request, "edit_profile.html", {
+        "profile": profile
+    })
