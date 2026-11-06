@@ -317,7 +317,7 @@
             <p>Update your information to get better job recommendations.</p>
         </div>
 
-        <form method="POST" action="" enctype="multipart/form-data"
+        <form method="POST" action="{% url 'edit_profile' %}" enctype="multipart/form-data"
               class="form-card">
 
             {% csrf_token %}
