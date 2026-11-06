@@ -281,9 +281,9 @@ def edit_profile(request):
             profile.resume = request.FILES["resume"]
 
         profile.save()
-        print("profile_view")
+        print("profile created")
 
-        return redirect("profile_page")
+        return redirect("profile_view")
 
     return render(request, "edit_profile.html", {
         "profile": profile
