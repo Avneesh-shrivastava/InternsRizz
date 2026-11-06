@@ -260,11 +260,13 @@ def interested_jobs_del(request, job_id):
 
 @login_required
 def edit_profile(request):
+    print("function runs")
     profile, created = Profile.objects.get_or_create(
         user=request.user
     )
 
     if request.method == "POST":
+        print("got the request")
         profile.phone = request.POST.get("phone", "")
         profile.location = request.POST.get("location", "")
         profile.preferred_role = request.POST.get("preferred_role", "")
