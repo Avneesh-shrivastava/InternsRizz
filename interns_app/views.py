@@ -281,6 +281,7 @@ def edit_profile(request):
             profile.resume = request.FILES["resume"]
 
         profile.save()
+        print("profile_view")
 
         return redirect("profile_page")
 
