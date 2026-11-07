@@ -145,7 +145,10 @@ def profile_setup(request):
 
 @login_required(login_url='/login-view/')
 def job_feed(request):
-    job_swipe = JobSwipe.objects.filter(user=request.user)
+    job_swipe_ids = []
+    for i in jobs:
+        job_swipe_ids.append(i.id)
+    print(job_swipe_ids)
     
     curr_job_role = ""
     if request.method == "POST":
@@ -154,9 +157,15 @@ def job_feed(request):
 
     curr_job_role = request.GET.get("role", "")
     if curr_job_role != "":
-        jobs = Job.objects.filter(is_active=True,job_role=curr_job_role)
+        jobs = Job.objects.filter(is_active=True,job_role=curr_job_role).exclude(id_in=job_swipe_ids)
     else:
         jobs = Job.objects.filter(is_active=True)
+
+
+
+    job_swipe = JobSwipe.objects.filter(user=request.user)
+
+
     return render(request, "job_feed.html", {
         "jobs": jobs,
         "curr_job_role" : curr_job_role 
