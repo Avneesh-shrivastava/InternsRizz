@@ -15,6 +15,7 @@ import dj_database_url
 from decouple import config
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -80,9 +81,9 @@ WSGI_APPLICATION = 'internsrizz.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 CLOUDINARY_STORAGE = {
-    "CLOUD_NAME": os.environ.get("CLOUDINARY_CLOUD_NAME"),
-    "API_KEY": os.environ.get("CLOUDINARY_API_KEY"),
-    "API_SECRET": os.environ.get("CLOUDINARY_API_SECRET"),
+    "CLOUD_NAME": config("CLOUDINARY_CLOUD_NAME"),
+    "API_KEY": config("CLOUDINARY_API_KEY"),
+    "API_SECRET": config("CLOUDINARY_API_SECRET"),
 }
 
 STORAGES = {
@@ -99,7 +100,7 @@ DATABASES = {
         default=config('DATABASE_URL')
     )
 }
-
+print("Cloud name:", os.environ.get("CLOUDINARY_CLOUD_NAME"))
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
