@@ -100,7 +100,6 @@ DATABASES = {
         default=config('DATABASE_URL')
     )
 }
-print("Cloud name:", os.environ.get("CLOUDINARY_CLOUD_NAME"))
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
