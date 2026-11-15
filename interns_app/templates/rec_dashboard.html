@@ -1,0 +1,741 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recruiter Dashboard | Jobs 2 Swipe</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #080b18;
+    color: #ffffff;
+}
+
+/* Layout */
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+
+.sidebar {
+    width: 250px;
+    background: #0d1122;
+    border-right: 1px solid #202640;
+    padding: 28px 18px;
+    position: fixed;
+    height: 100vh;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+    margin-bottom: 45px;
+}
+
+.logo span {
+    background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.menu-title {
+    color: #69738f;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 25px 12px 12px;
+}
+
+.sidebar a {
+    display: block;
+    text-decoration: none;
+    color: #a7aec5;
+    padding: 13px 14px;
+    border-radius: 9px;
+    margin-bottom: 7px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background: linear-gradient(90deg, #33235f, #172b54);
+    color: white;
+}
+
+.sidebar a.active {
+    border-left: 3px solid #8b5cf6;
+}
+
+/* Main Content */
+
+.main {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    padding: 30px 35px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    gap: 15px;
+}
+
+.topbar h2 {
+    font-size: 25px;
+}
+
+.topbar p {
+    color: #929bb5;
+    font-size: 13px;
+    margin-top: 7px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-weight: bold;
+}
+
+.profile-info p {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.profile-info small {
+    color: #929bb5;
+}
+
+/* Welcome Banner */
+
+.welcome {
+    background: linear-gradient(120deg, #292052, #142c58);
+    border: 1px solid #40346e;
+    border-radius: 16px;
+    padding: 27px;
+    margin-bottom: 28px;
+}
+
+.welcome h2 {
+    font-size: 23px;
+    margin-bottom: 10px;
+}
+
+.welcome p {
+    color: #c0c5dc;
+    font-size: 14px;
+}
+
+.post-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 11px 19px;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* Statistics */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+.stat-card {
+    background: #11162a;
+    border: 1px solid #222a45;
+    border-radius: 13px;
+    padding: 22px;
+}
+
+.stat-card p {
+    color: #929bb5;
+    font-size: 13px;
+}
+
+.stat-card h2 {
+    font-size: 28px;
+    margin: 15px 0 9px;
+}
+
+.stat-card small {
+    color: #34d399;
+    font-size: 12px;
+}
+
+/* Content Grid */
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.panel {
+    background: #11162a;
+    border: 1px solid #222a45;
+    border-radius: 13px;
+    padding: 22px;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.panel-header h3 {
+    font-size: 16px;
+}
+
+.panel-header a {
+    color: #a78bfa;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+/* Application Chart */
+
+.chart {
+    height: 190px;
+    display: flex;
+    align-items: end;
+    justify-content: space-around;
+    border-bottom: 1px solid #343b55;
+    padding: 0 5px;
+}
+
+.bar-group {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+}
+
+.bar {
+    width: 23px;
+    border-radius: 5px 5px 0 0;
+    background: linear-gradient(180deg, #8b5cf6, #3b82f6);
+}
+
+.bar-group small {
+    color: #929bb5;
+    font-size: 11px;
+}
+
+/* Application Pipeline */
+
+.pipeline-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #252d47;
+}
+
+.pipeline-item:last-child {
+    border-bottom: none;
+}
+
+.pipeline-item p {
+    color: #b5bdd3;
+    font-size: 13px;
+}
+
+.pipeline-item strong {
+    font-size: 15px;
+}
+
+.pipeline-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+/* Tables */
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 550px;
+}
+
+th {
+    color: #929bb5;
+    font-size: 12px;
+    font-weight: normal;
+    text-align: left;
+    padding: 14px 10px;
+}
+
+td {
+    padding: 16px 10px;
+    border-top: 1px solid #252d47;
+    font-size: 13px;
+    color: #d5d9e7;
+}
+
+.status {
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+}
+
+.review {
+    background: #332c17;
+    color: #fbbf24;
+}
+
+.shortlisted {
+    background: #17352d;
+    color: #34d399;
+}
+
+.interview {
+    background: #272653;
+    color: #a78bfa;
+}
+
+.view-btn {
+    color: #a78bfa;
+    text-decoration: none;
+}
+
+/* Job Listings */
+
+.job-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.job-card {
+    background: #151b31;
+    border: 1px solid #28304b;
+    padding: 19px;
+    border-radius: 11px;
+}
+
+.job-card h4 {
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.job-card p {
+    color: #929bb5;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.job-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+
+.job-bottom span {
+    color: #34d399;
+}
+
+.job-bottom a {
+    color: #a78bfa;
+    text-decoration: none;
+}
+
+/* Responsive */
+
+@media (max-width: 1050px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .sidebar {
+        width: 65px;
+        padding: 20px 8px;
+    }
+
+    .logo {
+        font-size: 12px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .sidebar a {
+        font-size: 0;
+        text-align: center;
+        padding: 14px 5px;
+    }
+
+    .sidebar a::first-letter {
+        font-size: 17px;
+    }
+
+    .menu-title {
+        font-size: 0;
+    }
+
+    .main {
+        margin-left: 65px;
+        width: calc(100% - 65px);
+        padding: 20px 13px;
+    }
+
+    .topbar h2 {
+        font-size: 19px;
+    }
+
+    .profile-info {
+        display: none;
+    }
+
+    .stats {
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 15px;
+    }
+
+    .stat-card h2 {
+        font-size: 22px;
+    }
+
+    .job-list {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome {
+        padding: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">Jobs <span>2 Swipe</span></div>
+
+        <p class="menu-title">Main Menu</p>
+
+        <a href="" class="active">▦ Dashboard</a>
+        <a href="">▤ Manage Jobs</a>
+        <a href="">＋ Post a Job</a>
+        <a href="">♙ Find Candidates</a>
+        <a href="">▣ Applications</a>
+
+        <p class="menu-title">Account</p>
+
+        <a href="">◉ Company Profile</a>
+        <a href="">⚙ Settings</a>
+        <a href="">↪ Logout</a>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+                <h2>Recruiter Dashboard</h2>
+                <p>Manage your hiring activities and candidates.</p>
+            </div>
+
+            <div class="profile">
+                <div class="avatar">A</div>
+                <div class="profile-info">
+                    <p>Avneesh</p>
+                    <small>Recruiter</small>
+                </div>
+            </div>
+
+        </header>
+
+        <!-- Welcome -->
+        <section class="welcome">
+            <h2>Welcome back, Avneesh!</h2>
+            <p>Here's what's happening with your recruitment process.</p>
+
+            <a href="" class="post-btn">+ Post a New Job</a>
+        </section>
+
+        <!-- Statistics -->
+        <section class="stats">
+
+            <div class="stat-card">
+                <p>Total Jobs Posted</p>
+                <h2>12</h2>
+                <small>↑ 3 this month</small>
+            </div>
+
+            <div class="stat-card">
+                <p>Total Applications</p>
+                <h2>248</h2>
+                <small>↑ 18% this month</small>
+            </div>
+
+            <div class="stat-card">
+                <p>Shortlisted</p>
+                <h2>36</h2>
+                <small>↑ 8 this week</small>
+            </div>
+
+            <div class="stat-card">
+                <p>Active Jobs</p>
+                <h2>8</h2>
+                <small>Currently accepting applications</small>
+            </div>
+
+        </section>
+
+        <!-- Analytics -->
+        <section class="content-grid">
+
+            <div class="panel">
+
+                <div class="panel-header">
+                    <h3>Application Overview</h3>
+                    <a href="">Last 7 months</a>
+                </div>
+
+                <div class="chart">
+
+                    <div class="bar-group">
+                        <div class="bar" style="height: 35%;"></div>
+                        <small>May</small>
+                    </div>
+
+                    <div class="bar-group">
+                        <div class="bar" style="height: 55%;"></div>
+                        <small>Jun</small>
+                    </div>
+
+                    <div class="bar-group">
+                        <div class="bar" style="height: 42%;"></div>
+                        <small>Jul</small>
+                    </div>
+
+                    <div class="bar-group">
+                        <div class="bar" style="height: 75%;"></div>
+                        <small>Aug</small>
+                    </div>
+
+                    <div class="bar-group">
+                        <div class="bar" style="height: 60%;"></div>
+                        <small>Sep</small>
+                    </div>
+
+                    <div class="bar-group">
+                        <div class="bar" style="height: 90%;"></div>
+                        <small>Oct</small>
+                    </div>
+
+                    <div class="bar-group">
+                        <div class="bar" style="height: 70%;"></div>
+                        <small>Nov</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Pipeline -->
+            <div class="panel">
+
+                <div class="panel-header">
+                    <h3>Application Pipeline</h3>
+                    <a href="">View all</a>
+                </div>
+
+                <div class="pipeline-item">
+                    <p><span class="pipeline-dot" style="background:#60a5fa;"></span>Applied</p>
+                    <strong>248</strong>
+                </div>
+
+                <div class="pipeline-item">
+                    <p><span class="pipeline-dot" style="background:#fbbf24;"></span>Under Review</p>
+                    <strong>82</strong>
+                </div>
+
+                <div class="pipeline-item">
+                    <p><span class="pipeline-dot" style="background:#34d399;"></span>Shortlisted</p>
+                    <strong>36</strong>
+                </div>
+
+                <div class="pipeline-item">
+                    <p><span class="pipeline-dot" style="background:#a78bfa;"></span>Interview</p>
+                    <strong>18</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Recent Applications -->
+        <section class="panel" style="margin-bottom:25px;">
+
+            <div class="panel-header">
+                <h3>Recent Applications</h3>
+                <a href="">View all applications →</a>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Candidate</th>
+                            <th>Position</th>
+                            <th>Date Applied</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>Rahul Sharma</td>
+                            <td>Python Developer</td>
+                            <td>15 Nov 2026</td>
+                            <td><span class="status review">Under Review</span></td>
+                            <td><a href="" class="view-btn">View</a></td>
+                        </tr>
+
+                        <tr>
+                            <td>Priya Verma</td>
+                            <td>Frontend Developer</td>
+                            <td>14 Nov 2026</td>
+                            <td><span class="status shortlisted">Shortlisted</span></td>
+                            <td><a href="" class="view-btn">View</a></td>
+                        </tr>
+
+                        <tr>
+                            <td>Aman Gupta</td>
+                            <td>Django Developer</td>
+                            <td>13 Nov 2026</td>
+                            <td><span class="status interview">Interview</span></td>
+                            <td><a href="" class="view-btn">View</a></td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </section>
+
+        <!-- Active Jobs -->
+        <section class="panel">
+
+            <div class="panel-header">
+                <h3>Your Active Job Listings</h3>
+                <a href="">Manage all →</a>
+            </div>
+
+            <div class="job-list">
+
+                <div class="job-card">
+                    <h4>Python Developer</h4>
+                    <p>Full Time · Remote</p>
+
+                    <div class="job-bottom">
+                        <span>42 Applications</span>
+                        <a href="">Manage →</a>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <h4>Frontend Developer</h4>
+                    <p>Internship · Hybrid</p>
+
+                    <div class="job-bottom">
+                        <span>28 Applications</span>
+                        <a href="">Manage →</a>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <h4>Django Developer</h4>
+                    <p>Full Time · On-site</p>
+
+                    <div class="job-bottom">
+                        <span>35 Applications</span>
+                        <a href="">Manage →</a>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <h4>React Developer</h4>
+                    <p>Internship · Remote</p>
+
+                    <div class="job-bottom">
+                        <span>19 Applications</span>
+                        <a href="">Manage →</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
+
+
