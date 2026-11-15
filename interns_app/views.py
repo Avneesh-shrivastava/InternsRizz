@@ -296,3 +296,6 @@ def edit_profile(request):
     return render(request, "edit_profile.html", {
         "profile": profile
     })
+
+def rec_dashboard(request):
+    return render(request, 'rec_dashboard.html')
