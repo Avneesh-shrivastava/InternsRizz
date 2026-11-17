@@ -301,3 +301,6 @@ def edit_profile(request):
 def rec_dashboard(request):
     
     return render(request, 'rec_dashboard.html')
+
+def rec_login(request):
+    return render(request, 'rec_login.html')
