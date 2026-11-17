@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Login | Jobs 2 Swipe</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #080b18;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 430px;
+            background: #11162a;
+            padding: 40px;
+            border: 1px solid #252d48;
+            border-radius: 18px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 27px;
+            font-weight: bold;
+            margin-bottom: 35px;
+        }
+
+        .logo span {
+            background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .icon {
+            width: 55px;
+            height: 55px;
+            background: rgba(139, 92, 246, 0.15);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            margin: 0 auto 20px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #a7aec5;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 9px;
+            color: #dce1f1;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            background: #080b18;
+            border: 1px solid #303954;
+            border-radius: 9px;
+            outline: none;
+            color: white;
+            font-size: 14px;
+        }
+
+        input:focus {
+            border-color: #8b5cf6;
+        }
+
+        input::placeholder {
+            color: #727b96;
+        }
+
+        .forgot {
+            display: block;
+            text-align: right;
+            margin-top: 10px;
+            color: #a78bfa;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 9px;
+            background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            opacity: 0.88;
+            transform: translateY(-2px);
+        }
+
+        .signup {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #a7aec5;
+        }
+
+        .signup a {
+            color: #a78bfa;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .divider {
+            border-top: 1px solid #252d48;
+            margin: 25px 0;
+        }
+
+        .candidate-link {
+            text-align: center;
+            font-size: 13px;
+            color: #a7aec5;
+        }
+
+        .candidate-link a {
+            color: white;
+            text-decoration: none;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 28px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="logo">Jobs <span>2 Swipe</span></div>
+
+        <div class="icon">💼</div>
+
+        <h2>Recruiter Login</h2>
+        <p class="subtitle">
+            Sign in to manage jobs and find talented candidates.
+        </p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="email">Work Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@company.com"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                >
+                <a href="" class="forgot">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="login-btn">
+                Login to Dashboard →
+            </button>
+        </form>
+
+        <p class="signup">
+            New to Jobs 2 Swipe?
+            <a href="">Create Recruiter Account</a>
+        </p>
+
+        <div class="divider"></div>
+
+        <p class="candidate-link">
+            Looking for a job?
+            <a href="">Candidate Login</a>
+        </p>
+
+    </div>
+
+</body>
+</html>
