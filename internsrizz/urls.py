@@ -33,5 +33,5 @@ urlpatterns = [
     path("interested-jobs-del/<int:job_id>/", interested_jobs_del, name="interested_jobs_del"),
     path("edit-profile/", edit_profile, name="edit_profile"),
     path('dashboard-for-recruiters/', rec_dashboard, name='rec_dashboard'),
-    path('recruiter/login', rec_login, name='rec_login'),
+    path('recruiter/login/', rec_login, name='rec_login'),
 ]
