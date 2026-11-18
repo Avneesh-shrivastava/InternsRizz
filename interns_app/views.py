@@ -364,4 +364,4 @@ def rec_signup(request):
                 for error in e.messages:
                     messages.error(request, error)
 
-    return render(request, "recruiter_signup.html")
+    return render(request, "rec_signup.html")
