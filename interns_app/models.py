@@ -119,3 +119,17 @@ class JobSwipe(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.job.title} - {self.decision}"
+
+class Company(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+
+    def __str__(self):
+        return self.name
+
+class RecruiterProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="recruiters")
+    designation = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.user.username
