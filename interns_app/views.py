@@ -306,6 +306,31 @@ def rec_dashboard(request):
     return render(request, 'rec_dashboard.html')
 
 def rec_login(request):
+    if request.method == "POST":
+        email = request.POST.get("email", "").strip().lower()
+        password = request.POST.get("password", "")
+
+        user = authenticate(
+            request,
+            username=email,
+            password=password
+        )
+
+        if user is not None:
+
+            if RecruiterProfile.objects.filter(user=user).exists():
+
+                login(request, user)
+                return redirect("recruiter_dashboard")
+
+            else:
+                messages.error(
+                    request,
+                    "This account is not registered as a recruiter."
+                )
+
+        else:
+            messages.error(request, "Invalid email or password.")
     return render(request, 'rec_login.html')
 
 def rec_signup(request):
@@ -354,10 +379,7 @@ def rec_signup(request):
                         designation=designation
                     )
 
-                messages.success(
-                    request,
-                    "Recruiter account created successfully!"
-                )
+                messages.success(request, "Recruiter account created successfully!")
                 return redirect("recruiter_login")
 
             except ValidationError as e:
