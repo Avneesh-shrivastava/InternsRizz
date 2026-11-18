@@ -7,6 +7,9 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 import json
 from django.http import JsonResponse
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
+from django.db import transaction
 
 # Create your views here.
 def home_page(request):
@@ -304,3 +307,61 @@ def rec_dashboard(request):
 
 def rec_login(request):
     return render(request, 'rec_login.html')
+
+def rec_signup(request):
+    if request.method == "POST":
+
+        name = request.POST.get("name", "").strip()
+        email = request.POST.get("email", "").strip().lower()
+        company_name = request.POST.get("company", "").strip()
+        designation = request.POST.get("designation", "").strip()
+        password = request.POST.get("password", "")
+        confirm_password = request.POST.get("confirm_password", "")
+
+        if not all([name, email, company_name, designation,
+                    password, confirm_password]):
+            messages.error(request, "Please fill all fields.")
+
+        elif User.objects.filter(email__iexact=email).exists():
+            messages.error(request, "Email already registered.")
+
+        elif password != confirm_password:
+            messages.error(request, "Passwords do not match.")
+
+        elif request.POST.get("terms") != "on":
+            messages.error(request, "Please accept the terms.")
+
+        else:
+            try:
+                validate_password(password)
+
+                with transaction.atomic():
+
+                    user = User.objects.create_user(
+                        username=email,
+                        email=email,
+                        password=password,
+                        first_name=name
+                    )
+
+                    company, created = Company.objects.get_or_create(
+                        name=company_name
+                    )
+
+                    RecruiterProfile.objects.create(
+                        user=user,
+                        company=company,
+                        designation=designation
+                    )
+
+                messages.success(
+                    request,
+                    "Recruiter account created successfully!"
+                )
+                return redirect("recruiter_login")
+
+            except ValidationError as e:
+                for error in e.messages:
+                    messages.error(request, error)
+
+    return render(request, "recruiter_signup.html")
