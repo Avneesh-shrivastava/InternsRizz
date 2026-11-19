@@ -380,7 +380,7 @@ def rec_signup(request):
                     )
 
                 messages.success(request, "Recruiter account created successfully!")
-                return redirect("recruiter_login")
+                return redirect("rec_login")
 
             except ValidationError as e:
                 for error in e.messages:
