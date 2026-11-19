@@ -321,7 +321,7 @@ def rec_login(request):
             if RecruiterProfile.objects.filter(user=user).exists():
 
                 login(request, user)
-                return redirect("recruiter_dashboard")
+                return redirect("rec_dashboard")
 
             else:
                 messages.error(
