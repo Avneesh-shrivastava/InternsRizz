@@ -307,6 +307,7 @@ def rec_dashboard(request):
 
 def rec_login(request):
     if request.method == "POST":
+        
         email = request.POST.get("email", "").strip().lower()
         password = request.POST.get("password", "")
 
@@ -335,6 +336,7 @@ def rec_login(request):
 
 def rec_signup(request):
     if request.method == "POST":
+        
 
         name = request.POST.get("name", "").strip()
         email = request.POST.get("email", "").strip().lower()
