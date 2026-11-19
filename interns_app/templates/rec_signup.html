@@ -195,7 +195,7 @@
             Join Jobs 2 Swipe and connect with talented candidates.
         </p>
 
-        <form method="POST">
+        <form method="POST" action="{% url 'rec_signup' %}">
             {% csrf_token %}
 
             <div class="form-group">
@@ -292,6 +292,16 @@
             Looking for a job?
             <a href="">Create Candidate Account</a>
         </p>
+
+        {% if messages %}
+    {% for message in messages %}
+        <div class="message {{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+
 
     </div>
 
