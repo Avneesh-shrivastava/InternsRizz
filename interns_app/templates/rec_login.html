@@ -181,6 +181,13 @@
             Sign in to manage jobs and find talented candidates.
         </p>
 
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message {{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
         <form method="POST" action="{% url 'rec_login' %}">
             {% csrf_token %}
 
