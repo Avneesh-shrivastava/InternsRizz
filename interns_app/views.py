@@ -302,7 +302,7 @@ def edit_profile(request):
 
 
 def rec_dashboard(request):
-    
+
     return render(request, 'rec_dashboard.html')
 
 def rec_login(request):
@@ -365,7 +365,7 @@ def rec_signup(request):
                 with transaction.atomic():
 
                     user = User.objects.create_user(
-                        username=email,
+                        username=name.split()[0],
                         email=email,
                         password=password,
                         first_name=name
