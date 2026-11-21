@@ -271,13 +271,13 @@ def interested_jobs_del(request, job_id):
 
 @login_required
 def edit_profile(request):
-    print("function runs")
+    
     profile, created = Profile.objects.get_or_create(
         user=request.user
     )
 
     if request.method == "POST":
-        print("got the request")
+        
         profile.phone = request.POST.get("phone", "")
         profile.location = request.POST.get("location", "")
         profile.preferred_role = request.POST.get("preferred_role", "")
@@ -307,9 +307,8 @@ def rec_dashboard(request):
 
 def rec_login(request):
     if request.method == "POST":
-        print('login form posted')
         
-        username = request.POST.get("username", "").strip().lower()
+        username = request.POST.get("username", "").strip()
         password = request.POST.get("password", "")
 
         user = authenticate(
@@ -317,9 +316,7 @@ def rec_login(request):
             username=username,
             password=password
         )
-        usern = User.objects.get(email=username)
-        print(usern)
-        
+  
         if user is not None:
 
             if RecruiterProfile.objects.filter(user=user).exists():
@@ -341,8 +338,6 @@ def rec_login(request):
 def rec_signup(request):
     
     if request.method == "POST":
-
-        print('signup form submitted')
 
         username = request.POST.get("username", "").strip()
         email = request.POST.get("email", "").strip().lower()
