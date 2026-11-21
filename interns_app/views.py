@@ -312,11 +312,7 @@ def rec_login(request):
         email = request.POST.get("email", "").strip().lower()
         password = request.POST.get("password", "")
 
-        user = authenticate(
-            request,
-            email=email,
-            password=password
-        )
+        
 
         if user is not None:
 
