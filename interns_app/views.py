@@ -307,6 +307,7 @@ def rec_dashboard(request):
 
 def rec_login(request):
     if request.method == "POST":
+        print('login form posted')
         
         email = request.POST.get("email", "").strip().lower()
         password = request.POST.get("password", "")
@@ -335,22 +336,27 @@ def rec_login(request):
     return render(request, 'rec_login.html')
 
 def rec_signup(request):
+    
     if request.method == "POST":
-        
 
-        name = request.POST.get("name", "").strip()
+        print('signup form submitted')
+
+        username = request.POST.get("username", "").strip()
         email = request.POST.get("email", "").strip().lower()
         company_name = request.POST.get("company", "").strip()
         designation = request.POST.get("designation", "").strip()
         password = request.POST.get("password", "")
         confirm_password = request.POST.get("confirm_password", "")
 
-        if not all([name, email, company_name, designation,
+        if not all([username, email, company_name, designation,
                     password, confirm_password]):
             messages.error(request, "Please fill all fields.")
 
         elif User.objects.filter(email__iexact=email).exists():
             messages.error(request, "Email already registered.")
+
+        elif User.objects.filter(username__iexact=username).exists():
+            messages.error(request, "Username already registered.")
 
         elif password != confirm_password:
             messages.error(request, "Passwords do not match.")
@@ -365,10 +371,10 @@ def rec_signup(request):
                 with transaction.atomic():
 
                     user = User.objects.create_user(
-                        username=name.split()[0],
+                        username=username,
                         email=email,
                         password=password,
-                        first_name=name
+                        first_name=username
                     )
 
                     company, created = Company.objects.get_or_create(
