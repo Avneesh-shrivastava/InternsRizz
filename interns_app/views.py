@@ -314,7 +314,7 @@ def rec_login(request):
 
         user = authenticate(
             request,
-            username=email,
+            email=email,
             password=password
         )
 
@@ -333,6 +333,7 @@ def rec_login(request):
 
         else:
             messages.error(request, "Invalid email or password.")
+        return redirect('rec_login')
     return render(request, 'rec_login.html')
 
 def rec_signup(request):
@@ -343,9 +344,11 @@ def rec_signup(request):
 
         username = request.POST.get("username", "").strip()
         email = request.POST.get("email", "").strip().lower()
+        print(email)
         company_name = request.POST.get("company", "").strip()
         designation = request.POST.get("designation", "").strip()
         password = request.POST.get("password", "")
+        print(password)
         confirm_password = request.POST.get("confirm_password", "")
 
         if not all([username, email, company_name, designation,
@@ -356,7 +359,7 @@ def rec_signup(request):
             messages.error(request, "Email already registered.")
 
         elif User.objects.filter(username__iexact=username).exists():
-            messages.error(request, "Username already registered.")
+            messages.error(request, "Username exists.")
 
         elif password != confirm_password:
             messages.error(request, "Passwords do not match.")
