@@ -309,11 +309,17 @@ def rec_login(request):
     if request.method == "POST":
         print('login form posted')
         
-        email = request.POST.get("email", "").strip().lower()
+        username = request.POST.get("username", "").strip().lower()
         password = request.POST.get("password", "")
 
+        user = authenticate(
+            request,
+            username=username,
+            password=password
+        )
+        usern = User.objects.get(email=username)
+        print(usern)
         
-
         if user is not None:
 
             if RecruiterProfile.objects.filter(user=user).exists():
