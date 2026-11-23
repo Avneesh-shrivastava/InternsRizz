@@ -461,13 +461,13 @@ td {
 <body>
 
 <div class="dashboard">
-
+    {% include './sidebar.html' %}
     <!-- Sidebar -->
-    <aside class="sidebar">
+
 
         <div class="logo">Jobs <span>2 Swipe</span></div>
 
-        <p class="menu-title">Main Menu</p>
+        <!-- <p class="menu-title">Main Menu</p>
 
         <a href="" class="active">▦ Dashboard</a>
         <a href="">▤ Manage Jobs</a>
@@ -479,9 +479,12 @@ td {
 
         <a href="">◉ Company Profile</a>
         <a href="">⚙ Settings</a>
-        <a href="">↪ Logout</a>
-
-    </aside>
+        <a href="">↪ Logout</a> -->
+        <main class="main-content">
+            {% block content %}
+            {% endblock %}
+        </main>
+    
 
     <!-- Main Content -->
     <main class="main">
