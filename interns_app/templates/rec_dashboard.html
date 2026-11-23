@@ -496,7 +496,7 @@ td {
             <div class="profile">
                 <div class="avatar">A</div>
                 <div class="profile-info">
-                    <p>Avneesh</p>
+                    <p>{{request.user}}</p>
                     <small>Recruiter</small>
                 </div>
             </div>
@@ -505,7 +505,7 @@ td {
 
         <!-- Welcome -->
         <section class="welcome">
-            <h2>Welcome back, Avneesh!</h2>
+            <h2>Welcome back, {{request.user}}!</h2>
             <p>Here's what's happening with your recruitment process.</p>
 
             <a href="" class="post-btn">+ Post a New Job</a>
