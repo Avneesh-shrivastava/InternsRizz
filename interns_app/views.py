@@ -302,8 +302,13 @@ def edit_profile(request):
 
 
 def rec_dashboard(request):
+    
 
-    return render(request, 'rec_dashboard.html')
+    context = {
+      
+    }
+
+    return render(request, 'rec_dashboard.html',context)
 
 def rec_login(request):
     if request.method == "POST":
