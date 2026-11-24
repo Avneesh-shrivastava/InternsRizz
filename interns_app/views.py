@@ -400,3 +400,6 @@ def rec_signup(request):
                     messages.error(request, error)
 
     return render(request, "rec_signup.html")
+
+def post_job(request):
+    return render(request, 'post_job.html')
