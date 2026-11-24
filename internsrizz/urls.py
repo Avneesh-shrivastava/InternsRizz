@@ -35,5 +35,6 @@ urlpatterns = [
     path('dashboard-for-recruiters/', rec_dashboard, name='rec_dashboard'),
     path('recruiter/login/', rec_login, name='rec_login'),
     path('recruiter/signup/', rec_signup, name='rec_signup'),
-    
+    path('recruiter/post_job/', post_job, name='post_job'),
+
 ]
