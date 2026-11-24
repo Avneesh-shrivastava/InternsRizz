@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -461,13 +460,13 @@ td {
 <body>
 
 <div class="dashboard">
-    {% include './sidebar.html' %}
-    <!-- Sidebar -->
 
+    <!-- Sidebar -->
+    <aside class="sidebar">
 
         <div class="logo">Jobs <span>2 Swipe</span></div>
 
-        <!-- <p class="menu-title">Main Menu</p>
+        <p class="menu-title">Main Menu</p>
 
         <a href="" class="active">▦ Dashboard</a>
         <a href="">▤ Manage Jobs</a>
@@ -479,12 +478,9 @@ td {
 
         <a href="">◉ Company Profile</a>
         <a href="">⚙ Settings</a>
-        <a href="">↪ Logout</a> -->
-        <main class="main-content">
-            {% block content %}
-            {% endblock %}
-        </main>
-    
+        <a href="">↪ Logout</a>
+
+    </aside>
 
     <!-- Main Content -->
     <main class="main">
@@ -499,7 +495,7 @@ td {
             <div class="profile">
                 <div class="avatar">A</div>
                 <div class="profile-info">
-                    <p>{{request.user}}</p>
+                    <p>Avneesh</p>
                     <small>Recruiter</small>
                 </div>
             </div>
@@ -508,7 +504,7 @@ td {
 
         <!-- Welcome -->
         <section class="welcome">
-            <h2>Welcome back, {{request.user}}!</h2>
+            <h2>Welcome back, Avneesh!</h2>
             <p>Here's what's happening with your recruitment process.</p>
 
             <a href="" class="post-btn">+ Post a New Job</a>
@@ -740,5 +736,3 @@ td {
 
 </body>
 </html>
-
-
