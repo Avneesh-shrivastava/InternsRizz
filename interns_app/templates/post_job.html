@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Job | Jobs 2 Swipe</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #080b18;
+            color: #ffffff;
+        }
+
+        /* Layout */
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: #0d1122;
+            border-right: 1px solid #202640;
+            padding: 28px 18px;
+            position: fixed;
+            height: 100vh;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+            margin-bottom: 45px;
+        }
+
+        .logo span {
+            background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .menu-title {
+            color: #69738f;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 25px 12px 12px;
+        }
+
+        .sidebar a {
+            display: block;
+            text-decoration: none;
+            color: #a7aec5;
+            padding: 13px 14px;
+            border-radius: 9px;
+            margin-bottom: 7px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: linear-gradient(90deg, #33235f, #172b54);
+            color: white;
+        }
+
+        .sidebar a.active {
+            border-left: 3px solid #8b5cf6;
+        }
+
+        /* Main Content */
+        .main {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            padding: 30px 35px;
+        }
+
+        .topbar {
+            margin-bottom: 35px;
+        }
+
+        .topbar h2 {
+            font-size: 25px;
+        }
+
+        .topbar p {
+            color: #929bb5;
+            font-size: 13px;
+            margin-top: 7px;
+        }
+
+        /* Form Container */
+        .form-container {
+            background: #11162a;
+            border: 1px solid #222a45;
+            border-radius: 13px;
+            padding: 28px;
+            max-width: 1000px;
+        }
+
+        .form-container h3 {
+            margin-bottom: 25px;
+            font-size: 18px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: span 2;
+        }
+
+        label {
+            font-size: 13px;
+            margin-bottom: 10px;
+            color: #d5d9e7;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            background: #080b18;
+            border: 1px solid #28304b;
+            padding: 13px;
+            border-radius: 8px;
+            color: white;
+            outline: none;
+            font-size: 14px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #8b5cf6;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: #69738f;
+        }
+
+        select option {
+            background: #11162a;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 28px;
+        }
+
+        button {
+            padding: 12px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .cancel {
+            background: transparent;
+            border: 1px solid #28304b;
+            color: white;
+        }
+
+        .cancel:hover {
+            background: #1a2038;
+        }
+
+        .submit {
+            background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+            border: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        .submit:hover {
+            opacity: 0.85;
+        }
+
+        /* Responsive */
+        @media (max-width: 1050px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .sidebar {
+                width: 65px;
+                padding: 20px 8px;
+            }
+
+            .logo {
+                font-size: 12px;
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            .sidebar a {
+                font-size: 0;
+                text-align: center;
+                padding: 14px 5px;
+            }
+
+            .sidebar a::first-letter {
+                font-size: 17px;
+            }
+
+            .menu-title {
+                font-size: 0;
+            }
+
+            .main {
+                margin-left: 65px;
+                width: calc(100% - 65px);
+                padding: 20px 13px;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+
+            .topbar h2 {
+                font-size: 19px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">Jobs <span>2 Swipe</span></div>
+
+        <p class="menu-title">Main Menu</p>
+
+        <a href="">▦ Dashboard</a>
+        <a href="">▤ Manage Jobs</a>
+        <a href="" class="active">＋ Post a Job</a>
+        <a href="">♙ Find Candidates</a>
+        <a href="">▣ Applications</a>
+
+        <p class="menu-title">Account</p>
+
+        <a href="">◉ Company Profile</a>
+        <a href="">⚙ Settings</a>
+        <a href="">↪ Logout</a>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+
+        <header class="topbar">
+            <h2>Post a Job</h2>
+            <p>Create a job listing to attract the right candidates.</p>
+        </header>
+
+        <div class="form-container">
+
+            <h3>Job Details</h3>
+
+            <form>
+
+                <div class="form-grid">
+
+                    <div class="form-group full">
+                        <label>Job Title</label>
+                        <input type="text" placeholder="e.g. Python Developer">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" placeholder="e.g. Bhopal, India">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Work Mode</label>
+                        <select>
+                            <option value="">Select work mode</option>
+                            <option>Remote</option>
+                            <option>Hybrid</option>
+                            <option>On-site</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Job Type</label>
+                        <select>
+                            <option value="">Select job type</option>
+                            <option>Full-time</option>
+                            <option>Part-time</option>
+                            <option>Internship</option>
+                            <option>Contract</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Experience Required</label>
+                        <input type="text" placeholder="e.g. Fresher or 0-2 years">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Minimum Salary (₹)</label>
+                        <input type="number" placeholder="e.g. 300000">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Maximum Salary (₹)</label>
+                        <input type="number" placeholder="e.g. 600000">
+                    </div>
+
+                    <div class="form-group full">
+                        <label>Job Description</label>
+                        <textarea placeholder="Describe the role, responsibilities and requirements..."></textarea>
+                    </div>
+
+                    <div class="form-group full">
+                        <label>Required Skills</label>
+                        <input type="text" placeholder="e.g. Python, Django, SQL">
+                    </div>
+
+                </div>
+
+                <div class="buttons">
+                    <button type="reset" class="cancel">Clear Form</button>
+                    <button type="submit" class="submit">Publish Job</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>
