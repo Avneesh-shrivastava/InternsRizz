@@ -266,7 +266,7 @@
 
         <p class="menu-title">Main Menu</p>
 
-        <a href="">▦ Dashboard</a>
+        <a href="/dashboard-for-recruiters">▦ Dashboard</a>
         <a href="">▤ Manage Jobs</a>
         <a href="" class="active">＋ Post a Job</a>
         <a href="">♙ Find Candidates</a>
@@ -292,8 +292,8 @@
 
             <h3>Job Details</h3>
 
-            <form>
-
+            <form method="POST" action="{% url 'post_job' %}">
+                {% csrf_token %}
                 <div class="form-grid">
 
                     <div class="form-group full">
