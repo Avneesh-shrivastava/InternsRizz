@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +19,6 @@
             color: #ffffff;
         }
 
-        /* Layout */
         .layout {
             display: flex;
             min-height: 100vh;
@@ -97,7 +97,7 @@
             margin-top: 7px;
         }
 
-        /* Form Container */
+        /* Form */
         .form-container {
             background: #11162a;
             border: 1px solid #222a45;
@@ -294,62 +294,107 @@
 
             <form method="POST" action="{% url 'post_job' %}">
                 {% csrf_token %}
+
                 <div class="form-grid">
 
+                    <!-- Job Title -->
                     <div class="form-group full">
-                        <label>Job Title</label>
-                        <input type="text" placeholder="e.g. Python Developer">
+                        <label for="title">Job Title</label>
+                        <input type="text" id="title" name="title"
+                               placeholder="e.g. Python Developer" required>
                     </div>
 
-                    <div class="form-group">
-                        <label>Location</label>
-                        <input type="text" placeholder="e.g. Bhopal, India">
+                    <!-- Job Role -->
+                    <div class="form-group full">
+                        <label for="job_role">Job Role / Category</label>
+                        <input type="text" id="job_role" name="job_role"
+                               placeholder="e.g. Software Development" required>
                     </div>
 
+                    <!-- Location -->
                     <div class="form-group">
-                        <label>Work Mode</label>
-                        <select>
+                        <label for="location">Location</label>
+                        <input type="text" id="location" name="location"
+                               placeholder="e.g. Bhopal, India" required>
+                    </div>
+
+                    <!-- Work Mode -->
+                    <div class="form-group">
+                        <label for="work_mode">Work Mode</label>
+                        <select id="work_mode" name="work_mode" required>
                             <option value="">Select work mode</option>
-                            <option>Remote</option>
-                            <option>Hybrid</option>
-                            <option>On-site</option>
+                            <option value="remote">Remote</option>
+                            <option value="hybrid">Hybrid</option>
+                            <option value="onsite">On-site</option>
                         </select>
                     </div>
 
+                    <!-- Job Type -->
                     <div class="form-group">
-                        <label>Job Type</label>
-                        <select>
+                        <label for="job_type">Job Type</label>
+                        <select id="job_type" name="job_type" required>
                             <option value="">Select job type</option>
-                            <option>Full-time</option>
-                            <option>Part-time</option>
-                            <option>Internship</option>
-                            <option>Contract</option>
+                            <option value="internship">Internship</option>
+                            <option value="full_time">Full Time</option>
+                            <option value="part_time">Part Time</option>
                         </select>
                     </div>
 
+                    <!-- Experience -->
                     <div class="form-group">
-                        <label>Experience Required</label>
-                        <input type="text" placeholder="e.g. Fresher or 0-2 years">
+                        <label for="experience">Experience Required</label>
+                        <select id="experience" name="experience" required>
+                            <option value="">Select experience</option>
+                            <option value="fresher">Fresher</option>
+                            <option value="0-1">0–1 Years</option>
+                            <option value="1-2">1–2 Years</option>
+                            <option value="2-3">2–3 Years</option>
+                            <option value="3+">3+ Years</option>
+                        </select>
                     </div>
 
+                    <!-- Salary Minimum -->
                     <div class="form-group">
-                        <label>Minimum Salary (₹)</label>
-                        <input type="number" placeholder="e.g. 300000">
+                        <label for="salary_min">Minimum Salary (₹/year)</label>
+                        <input type="number" id="salary_min" name="salary_min"
+                               placeholder="e.g. 300000" min="0">
                     </div>
 
+                    <!-- Salary Maximum -->
                     <div class="form-group">
-                        <label>Maximum Salary (₹)</label>
-                        <input type="number" placeholder="e.g. 600000">
+                        <label for="salary_max">Maximum Salary (₹/year)</label>
+                        <input type="number" id="salary_max" name="salary_max"
+                               placeholder="e.g. 600000" min="0">
                     </div>
 
+                    <!-- Duration -->
+                    <div class="form-group">
+                        <label for="duration">Job Duration</label>
+                        <input type="text" id="duration" name="duration"
+                               placeholder="e.g. 6 months (for internship)">
+                    </div>
+
+                    <!-- Application URL -->
+                    <div class="form-group">
+                        <label for="application_url">Application URL</label>
+                        <input type="url" id="application_url" name="application_url"
+                               placeholder="https://example.com/apply">
+                    </div>
+
+                    <!-- Description -->
                     <div class="form-group full">
-                        <label>Job Description</label>
-                        <textarea placeholder="Describe the role, responsibilities and requirements..."></textarea>
+                        <label for="description">Job Description</label>
+                        <textarea id="description" name="description"
+                                  placeholder="Describe the role, responsibilities and requirements..."
+                                  required></textarea>
                     </div>
 
+                    <!-- Skills -->
                     <div class="form-group full">
-                        <label>Required Skills</label>
-                        <input type="text" placeholder="e.g. Python, Django, SQL">
+                        <label for="skills">Required Skills</label>
+                        <textarea id="skills" name="skills"
+                                  placeholder="e.g. Python, Django, SQL"
+                                  required></textarea>
                     </div>
 
                 </div>
