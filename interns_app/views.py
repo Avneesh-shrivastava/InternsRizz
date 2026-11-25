@@ -402,4 +402,38 @@ def rec_signup(request):
     return render(request, "rec_signup.html")
 
 def post_job(request):
+    if request.method == "POST":
+    
+        title = request.POST.get("title")
+        location = request.POST.get("location")
+        work_mode = request.POST.get("work_mode")
+        job_type = request.POST.get("job_type")
+        experience = request.POST.get("experience")
+        salary_min = request.POST.get("salary_min") or None
+        salary_max = request.POST.get("salary_max") or None
+        description = request.POST.get("description")
+        skills = request.POST.get("skills")
+        duration = request.POST.get("duration", "")
+        application_url = request.POST.get("application_url", "")
+        job_role = request.POST.get("job_role")
+
+        
+        Job.objects.create(
+            title=title,
+            company=request.user.recruiterprofile.company.name,
+            description=description,
+            skills=skills,
+            location=location,
+            job_type=job_type,
+            work_mode=work_mode,
+            experience=experience,
+            salary_min=salary_min,
+            salary_max=salary_max,
+            duration=duration,
+            application_url=application_url,
+            job_role=job_role,
+        )
+
+        messages.success(request, "Job posted successfully!")
+        return redirect("post_job")
     return render(request, 'post_job.html')
