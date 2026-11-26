@@ -437,3 +437,10 @@ def post_job(request):
         messages.success(request, "Job posted successfully!")
         return redirect("post_job")
     return render(request, 'post_job.html')
+
+def rem_saved_jobs(request, saved_job_id):
+    job = JobSwipe.objects.get(id=saved_job_id)
+    job.decision = ""
+    job.save()
+
+    return redirect('saved_jobs_view')
