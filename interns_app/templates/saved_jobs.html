@@ -493,13 +493,13 @@
                                     </a>
                                 {% endif %}
 
-                                <form method="post"
-                                      action="">
+                                <!-- <form method="post"
+                                      action="{ url 'rem_saved_jobs'  }"> -->
                                     {% csrf_token %}
-                                    <button type="submit" class="remove-btn">
+                                    <a href="/rem_saved_jobs/{{swipe.id}}"><button type="submit" class="remove-btn">
                                         Remove
-                                    </button>
-                                </form>
+                                    </button></a>
+                                <!-- </form> -->
                             </div>
                         </div>
 
