@@ -238,7 +238,7 @@ def saved_jobs_view(request):
         "saved_jobs": saved_jobs
     })
 
-
+@login_required
 def interested_jobs(request):
     interested_jobs = JobSwipe.objects.filter(
             user=request.user,
@@ -261,6 +261,7 @@ def interested_jobs(request):
         "interested_jobs": interested_jobs
     })
 
+@login_required
 def interested_jobs_del(request, job_id):
     interested_job = JobSwipe.objects.get(id=job_id)
     interested_job.decision = 'saved'
@@ -300,7 +301,7 @@ def edit_profile(request):
         "profile": profile
     })
 
-
+@login_required
 def rec_dashboard(request):
     
 
@@ -309,6 +310,7 @@ def rec_dashboard(request):
     }
 
     return render(request, 'rec_dashboard.html',context)
+
 
 def rec_login(request):
     if request.method == "POST":
@@ -401,6 +403,7 @@ def rec_signup(request):
 
     return render(request, "rec_signup.html")
 
+@login_required
 def post_job(request):
     if request.method == "POST":
     
@@ -438,9 +441,10 @@ def post_job(request):
         return redirect("post_job")
     return render(request, 'post_job.html')
 
+@login_required
 def rem_saved_jobs(request, saved_job_id):
     job = JobSwipe.objects.get(id=saved_job_id)
-    job.decision = ""
-    job.save()
+    job.delete()
+    
 
     return redirect('saved_jobs_view')
