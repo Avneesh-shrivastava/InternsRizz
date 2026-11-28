@@ -846,28 +846,34 @@ nav {
         </div>
 
         <!-- SWIPE ACTIONS -->
-        <form method="post" action="{ url 'job_swipe_decision'}">
+        <form method="post" action="{% url 'job_swipe_decision' %}">
             {% csrf_token %}
         <div class="swipe-actions">
 
             <button type="submit"
                     class="swipe-btn reject"
                     data-decision="not_interested"
-                    title="Not Interested">
+                    title="Not Interested"
+                    value="not_interested"
+                    name="decision">
                 ✕
             </button>
 
             <button type="submit"
                     class="swipe-btn save"
                     data-decision="saved"
-                    title="Save Job">
+                    title="Save Job"
+                    value="saved"
+                    name="decision">
                 ☆
             </button>
 
-            <button type="button"
+            <button type="submit"
                     class="swipe-btn like"
                     data-decision="interested"
-                    title="Interested">
+                    title="Interested"
+                    value="interested"
+                    name="decision">
                 ♥
             </button>
 
