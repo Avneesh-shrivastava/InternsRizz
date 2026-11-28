@@ -215,6 +215,8 @@ def swipe_job(request):
             status=404,
         )
 
+  
+
 
 @login_required
 def profile_view(request):
@@ -448,3 +450,10 @@ def rem_saved_jobs(request, saved_job_id):
     
 
     return redirect('saved_jobs_view')
+
+def job_swipe_decision(request):
+    if request.method == 'POST':
+        decision = request.POST.get('decision')
+        print('form submitted')
+        print(decision)
+    return redirect('job_feed')
