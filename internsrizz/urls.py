@@ -37,5 +37,6 @@ urlpatterns = [
     path('recruiter/signup/', rec_signup, name='rec_signup'),
     path('recruiter/post_job/', post_job, name='post_job'),
     path('rem_saved_jobs/<int:saved_job_id>/',rem_saved_jobs , name='rem_saved_jobs'),
+    path('job_swipe_decision/', job_swipe_decision , name='job_swipe_decision')
 
 ]
